@@ -1,0 +1,9 @@
+@import url("./reset.css");
+@import url("./tailwind.css");
+@import url("./notify.css");
+@import url("./variable.css");
+
+.icon-small--center {
+  display: flex;
+  align-items: center;
+}
