@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <FirstRow />
-    <div class="list-sale columns-4 gap-8">
+    <div class="list-sale columns-4 gap-8 py-5">
       <SaleInfo />
       <SaleInfo />
       <SaleInfo />
@@ -12,4 +12,7 @@
 <script setup lang="ts">
 import FirstRow from "../dashboard/firstRow/FirstRow.vue";
 import SaleInfo from "./SaleInfo.vue";
+const listSale = [
+  
+]
 </script>

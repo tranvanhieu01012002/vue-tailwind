@@ -7,3 +7,7 @@
   display: flex;
   align-items: center;
 }
+
+.text-primary {
+  color:  #0632f5;
+}
