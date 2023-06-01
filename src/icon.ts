@@ -9,9 +9,11 @@ import {
   faUserSecret,
   faMoneyBill,
   faCartShopping,
+  faBarcode,
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
-// import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+// import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
-library.add(faUserSecret, faMoneyBill, faCartShopping);
+library.add(faUserSecret, faMoneyBill, faCartShopping, faBarcode, faWallet);
 
 export default FontAwesomeIcon;
