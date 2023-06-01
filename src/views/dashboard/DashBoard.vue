@@ -1,7 +1,13 @@
 <template>
-  <div class="dashboard bg-o">
-    <FirstRow />
-    <div class="list-sale columns-4 gap-8 py-5">
+  <div class="dashboard grid grid-flow-row auto-rows-max gap-y-8">
+    <!--Start First row -->
+    <div class="flex justify-between">
+      <TimeBar />
+      <ButtonGroup />
+    </div>
+    <!--End First row -->
+    <!-- Start Second row -->
+    <div class="list-sale grid xl:grid-cols-4 md:grid-cols-2 gap-8">
       <SaleInfo
         v-for="(saleIcon, index) in listSaleIcon"
         :key="index"
@@ -9,12 +15,22 @@
         :sale-info="listSaleInfo[index]"
       />
     </div>
+    <!-- End Second row -->
+    <!-- Start Third row -->
+    <div class="grid grid-cols-12 gap-8">
+      <SaleProgress class="col-span-4" />
+      <AnalysisChart class="col-span-8" />
+    </div>
+    <!-- End Third row -->
   </div>
 </template>
 <script setup lang="ts">
 import { SaleIcon, SaleInfo as SaleInfoType } from "@/types";
-import FirstRow from "../dashboard/firstRow/FirstRow.vue";
-import SaleInfo from "./SaleInfo.vue";
+import ButtonGroup from "./firstRow/ButtonGroup.vue";
+import TimeBar from "./firstRow/TimeBar.vue";
+import SaleInfo from "./secondRow/SaleInfo.vue";
+import SaleProgress from "./thirdRow/SaleProgress.vue";
+import AnalysisChart from "./thirdRow/AnalysisChart.vue";
 const listSaleIcon: Array<SaleIcon> = [
   {
     icon: ["fas", "money-bill"],

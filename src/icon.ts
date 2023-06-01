@@ -11,9 +11,21 @@ import {
   faCartShopping,
   faBarcode,
   faWallet,
+  faEllipsisVertical,
+  faArrowUp,
+  faArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
-library.add(faUserSecret, faMoneyBill, faCartShopping, faBarcode, faWallet);
+library.add(
+  faUserSecret,
+  faMoneyBill,
+  faCartShopping,
+  faBarcode,
+  faWallet,
+  faEllipsisVertical,
+  faArrowUp,
+  faArrowDown
+);
 
 export default FontAwesomeIcon;

@@ -15,7 +15,9 @@
         />
       </div>
     </div>
-    <div class="sale-info__text my-4">{{ saleInfo.text }}</div>
+    <div class="sale-info__text text-gray-custom--100 my-4">
+      {{ saleInfo.text }}
+    </div>
     <div class="sale-info__price flex">
       <div class="text-3xl font-semibold">
         {{ `${saleInfo.unit ?? ""}${numeral(saleInfo.price).format("0.00a")}` }}
@@ -59,6 +61,5 @@ const showCssPercent = computed((): string => {
 <style lang="scss" scoped>
 .sale-info__text {
   font-size: 20px;
-  color: #667085;
 }
 </style>

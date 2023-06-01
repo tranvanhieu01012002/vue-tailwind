@@ -1,4 +1,6 @@
 :root {
   --color-primary: #5c59e8;
   --color-normal: #dedefa;
+  --color-gray:   #667085;
+  --color-gray--100: #333843;
 }

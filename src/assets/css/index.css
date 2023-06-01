@@ -11,3 +11,9 @@
 .text-primary {
   color:  #0632f5;
 }
+.text-gray-custom {
+  color: var(--color-gray);
+}
+.text-gray-custom-100 {
+  color: var(--color-gray--100);
+}
