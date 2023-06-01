@@ -3,12 +3,9 @@
     <template #title>Analyst</template>
     <template #description>Revenue and Sales</template>
     <template #content>
-      <Line
-        class="w-full h-14"
-        id="my-chart-id"
-        :options="chartOptions"
-        :data="chartData"
-      />
+      <div>
+        <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
+      </div>
     </template>
   </PaddingComponent>
 </template>

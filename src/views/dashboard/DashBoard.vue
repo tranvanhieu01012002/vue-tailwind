@@ -22,6 +22,11 @@
       <AnalysisChart class="col-span-8" />
     </div>
     <!-- End Third row -->
+    <!-- Start Fourth row -->
+    <div class="grid grid-cols-12 gap-8">
+      <SellingTable class="col-span-8" />
+    </div>
+    <!-- End Fourth row -->
   </div>
 </template>
 <script setup lang="ts">
@@ -31,6 +36,7 @@ import TimeBar from "./firstRow/TimeBar.vue";
 import SaleInfo from "./secondRow/SaleInfo.vue";
 import SaleProgress from "./thirdRow/SaleProgress.vue";
 import AnalysisChart from "./thirdRow/AnalysisChart.vue";
+import SellingTable from "./fourthRow/SellingTable.vue";
 const listSaleIcon: Array<SaleIcon> = [
   {
     icon: ["fas", "money-bill"],

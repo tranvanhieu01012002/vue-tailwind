@@ -22,7 +22,7 @@
           />
         </div>
         <div class="my-5">
-          <p class="text-gray-custom-100 text">
+          <p class="text-gray-custom-100 text text-center">
             You succeed earn <strong>$240</strong> today, its higher than
             yesterday
           </p>
