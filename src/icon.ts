@@ -17,6 +17,8 @@ import {
   faFilter,
   faEye,
   faPencil,
+  faHeadphones,
+  faGear,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -31,7 +33,9 @@ library.add(
   faArrowDown,
   faFilter,
   faEye,
-  faPencil
+  faPencil,
+  faHeadphones,
+  faGear
 );
 
 export default FontAwesomeIcon;

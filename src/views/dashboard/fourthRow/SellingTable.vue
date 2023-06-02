@@ -1,7 +1,7 @@
 <template>
   <PaddingComponent>
     <template #title>Top selling product</template>
-    <template #right></template><FilterButton />
+    <template #right><FilterButton /></template>
     <template #content>
       <div class="w-full pt-5">
         <table class="w-full">
