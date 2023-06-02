@@ -2,6 +2,9 @@
   <PaddingComponent>
     <template #title>Analyst</template>
     <template #description>Revenue and Sales</template>
+    <template #right>
+      <font-awesome-icon class="text-3xl" :icon="['fas', 'ellipsis-vertical']"
+    /></template>
     <template #content>
       <div>
         <Line id="my-chart-id" :options="chartOptions" :data="chartData" />

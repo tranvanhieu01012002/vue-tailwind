@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-5 rounded-md">
+  <div class="bg-white p-5 rounded-md shadow-lg shadow-gray-400">
     <div class="header flex justify-between">
       <div class="header-left">
         <strong class="header-left__title text-gray-custom-100"
@@ -11,15 +11,13 @@
       </div>
       <div class="header-center"><slot name="center"></slot></div>
       <div class="header-right">
-        <font-awesome-icon
-          class="text-3xl"
-          :icon="['fas', 'ellipsis-vertical']"
-        />
+        <slot name="right"></slot>
       </div>
     </div>
     <div class="content">
       <slot name="content"></slot>
     </div>
+    <div class="footer"><slot name="footer"></slot></div>
   </div>
 </template>
 <script setup lang="ts"></script>

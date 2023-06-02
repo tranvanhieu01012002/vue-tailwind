@@ -14,6 +14,7 @@ import {
   faEllipsisVertical,
   faArrowUp,
   faArrowDown,
+  faFilter,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -25,7 +26,8 @@ library.add(
   faWallet,
   faEllipsisVertical,
   faArrowUp,
-  faArrowDown
+  faArrowDown,
+  faFilter
 );
 
 export default FontAwesomeIcon;

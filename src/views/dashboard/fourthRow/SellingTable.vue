@@ -1,50 +1,120 @@
 <template>
   <PaddingComponent>
     <template #title>Top selling product</template>
+    <template #right
+      ><ButtonComponent :style="'btn-white'"
+        ><font-awesome-icon :icon="['fas', 'filter']" />
+        Filters</ButtonComponent
+      ></template
+    >
     <template #content>
-      <table class="w-full table">
-        <thead>
-          <tr>
-            <th class="py-4 bg-gray-300">Product</th>
-            <th class="py-4 bg-gray-300">Sales</th>
-            <th class="py-4 bg-gray-300">Amount</th>
-            <th class="py-4 bg-gray-300">Price</th>
-            <th class="py-4 bg-gray-300">status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-bottom-solid">
-            <td class="py-4"><div class="text-center">401</div></td>
-            <td class="py-4"><div class="text-center">401</div></td>
-            <td class="py-4"><div class="text-center">401</div></td>
-            <td class="py-4"><div class="text-center">401</div></td>
-            <td class="py-4"><div class="text-center">401</div></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="w-full pt-5">
+        <table class="w-full">
+          <thead class="text-white bg-gray-300">
+            <tr>
+              <th class="py-4 w-40">
+                <span>product</span>
+              </th>
+              <th>sales</th>
+              <th>amount</th>
+              <th>price</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="even:bg-gray-300 hover:bg-gray-400">
+              <td>
+                <div class=""><ProductCell /></div>
+              </td>
+              <td class="pb-3">2</td>
+              <td>2</td>
+              <td>2</td>
+              <td class="w-20">
+                <SpanStatusComponent :bg="SpanStatus.SUCCESS"
+                  >Publish</SpanStatusComponent
+                >
+              </td>
+            </tr>
+            <tr class="even:bg-gray-300 hover:bg-gray-400">
+              <td>
+                <div class=""><ProductCell /></div>
+              </td>
+              <td class="pb-3">2</td>
+              <td>2</td>
+              <td>2</td>
+              <td class="w-20">
+                <SpanStatusComponent :bg="SpanStatus.CANCEL"
+                  ><small>Cancel</small></SpanStatusComponent
+                >
+              </td>
+            </tr>
+            <tr class="even:bg-gray-300 hover:bg-gray-400">
+              <td>
+                <div class=""><ProductCell /></div>
+              </td>
+              <td class="pb-3">2</td>
+              <td>2</td>
+              <td>2</td>
+              <td class="w-20">
+                <SpanStatusComponent :bg="SpanStatus.SUCCESS"
+                  >Publish</SpanStatusComponent
+                >
+              </td>
+            </tr>
+            <tr class="even:bg-gray-300 hover:bg-gray-400">
+              <td>
+                <div class=""><ProductCell /></div>
+              </td>
+              <td class="pb-3">2</td>
+              <td>2</td>
+              <td>2</td>
+              <td class="w-20">
+                <SpanStatusComponent :bg="SpanStatus.SHIP"
+                  ><small>Ship</small></SpanStatusComponent
+                >
+              </td>
+            </tr>
+            <tr class="even:bg-gray-300 hover:bg-gray-400">
+              <td>
+                <div class=""><ProductCell /></div>
+              </td>
+              <td class="pb-3">2</td>
+              <td>2</td>
+              <td>2</td>
+              <td class="w-20">
+                <SpanStatusComponent :bg="SpanStatus.SUCCESS"
+                  >Publish</SpanStatusComponent
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
+    <template #footer>
+      <FooterTable />
     </template>
   </PaddingComponent>
 </template>
 <script setup lang="ts">
 import PaddingComponent from "../components/PaddingComponent.vue";
+import ProductCell from "./components/ProductCell.vue";
+import SpanStatusComponent from "@/components/SpanStatusComponent.vue";
+import FooterTable from "./components/FooterTable.vue";
+import ButtonComponent from "@/components/button/ButtonComponent.vue";
+import { SpanStatus } from "@/enums";
 </script>
 <style scoped lang="scss">
-.table-header {
-  padding: 20px;
+thead {
+  text-transform: capitalize;
+}
+table {
+  text-align: center;
+
+  border-collapse: collapse;
+
+  margin: auto;
+
+  font-size: 20px;
 }
 </style>
-<!-- <div class="product-cell flex">
-  <div class="img">
-    <img
-      src="@/assets/img/products/Img.png"
-      class="h-18 w-18 m-3"
-      alt=""
-    />
-  </div>
-  <div class="content mt-3">
-    <div class="content--name">IPhone</div>
-    <div class="content--sku text-gray-custom-100 text-sm">
-      SKU:300032
-    </div>
-  </div>
-</div> -->

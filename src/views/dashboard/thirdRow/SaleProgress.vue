@@ -2,6 +2,9 @@
   <PaddingComponent>
     <template #title>Sale Progress</template>
     <template #description>This quarter</template>
+    <template #right>
+      <font-awesome-icon class="text-3xl" :icon="['fas', 'ellipsis-vertical']"
+    /></template>
     <template #content>
       <div class="flex flex-col h-90">
         <div class="flex justify-center">
@@ -40,8 +43,8 @@
 </template>
 <script setup lang="ts">
 import PaddingComponent from "../components/PaddingComponent.vue";
-import PerCircle from "./PerCircle.vue";
-import TextMoney from "./TextMoney.vue";
+import PerCircle from "./components/PerCircle.vue";
+import TextMoney from "./components/TextMoney.vue";
 </script>
 <style scoped lang="scss">
 .text {

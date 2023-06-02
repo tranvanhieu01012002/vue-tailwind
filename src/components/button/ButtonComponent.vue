@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import { defineProps } from "vue";
-defineProps({ style: { type: String } });
+defineProps({ style: { type: String, required: false, default: "btn-white" } });
 </script>
 <style lang="scss" scoped>
 .btn {
