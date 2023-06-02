@@ -1,12 +1,7 @@
 <template>
   <PaddingComponent>
     <template #title>Top selling product</template>
-    <template #right
-      ><ButtonComponent :style="'btn-white'"
-        ><font-awesome-icon :icon="['fas', 'filter']" />
-        Filters</ButtonComponent
-      ></template
-    >
+    <template #right></template><FilterButton />
     <template #content>
       <div class="w-full pt-5">
         <table class="w-full">
@@ -100,8 +95,8 @@
 import PaddingComponent from "../components/PaddingComponent.vue";
 import ProductCell from "./components/ProductCell.vue";
 import SpanStatusComponent from "@/components/SpanStatusComponent.vue";
-import FooterTable from "./components/FooterTable.vue";
-import ButtonComponent from "@/components/button/ButtonComponent.vue";
+import FooterTable from "@/components/FooterTable.vue";
+import FilterButton from "@/components/button/FilterButton.vue";
 import { SpanStatus } from "@/enums";
 </script>
 <style scoped lang="scss">

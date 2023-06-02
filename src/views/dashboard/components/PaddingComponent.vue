@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white p-5 rounded-md shadow-lg shadow-gray-400">
-    <div class="header flex justify-between">
+    <div class="header flex justify-between capitalize">
       <div class="header-left">
         <strong class="header-left__title text-gray-custom-100"
           ><slot name="title"></slot

@@ -1,7 +1,7 @@
 <template>
   <button
     :class="style"
-    class="btn rounded-md w-40 border-2 border-solid mx-2 py-2"
+    class="btn rounded-md w-40 border-2 border-solid mx-2 py-2 capitalize"
   >
     <strong><slot></slot></strong>
   </button>

@@ -27,6 +27,10 @@
       <SellingTable class="col-span-8" />
       <SaleByLocation class="col-span-4" />
     </div>
+
+    <div class="w-full">
+      <FifthRow />
+    </div>
     <!-- End Fourth row -->
   </div>
 </template>
@@ -39,6 +43,7 @@ import SaleProgress from "./thirdRow/SaleProgress.vue";
 import AnalysisChart from "./thirdRow/AnalysisChart.vue";
 import SellingTable from "./fourthRow/SellingTable.vue";
 import SaleByLocation from "./fourthRow/SaleByLocation.vue";
+import FifthRow from "./fifthRow/FifthRow.vue";
 const listSaleIcon: Array<SaleIcon> = [
   {
     icon: ["fas", "money-bill"],
