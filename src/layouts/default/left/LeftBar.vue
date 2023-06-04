@@ -3,12 +3,11 @@
     <div class="top">
       <BranchComponent />
       <div class="categories">
-        <CategoryComponent />
-        <CategoryComponent />
-        <CategoryComponent />
-        <CategoryComponent />
-        <CategoryComponent />
-        <CategoryComponent />
+        <CategoryComponent
+          v-for="(category, index) in listCategory"
+          :key="index"
+          :category="category"
+        />
       </div>
     </div>
     <div class="bottom fixed bottom-1 pb-5 text-3xl text-gray-400">
@@ -26,6 +25,7 @@
 <script setup lang="ts">
 import BranchComponent from "./BranchComponent.vue";
 import CategoryComponent from "./CategoryComponent.vue";
+import { listCategory } from "./categories";
 </script>
 <style scoped lang="scss">
 .gear {

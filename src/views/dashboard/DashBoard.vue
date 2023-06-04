@@ -29,7 +29,7 @@
     </div>
 
     <div class="w-full">
-      <FifthRow />
+      <RecentOrderTable />
     </div>
     <!-- End Fourth row -->
   </div>
@@ -43,7 +43,7 @@ import SaleProgress from "./thirdRow/SaleProgress.vue";
 import AnalysisChart from "./thirdRow/AnalysisChart.vue";
 import SellingTable from "./fourthRow/SellingTable.vue";
 import SaleByLocation from "./fourthRow/SaleByLocation.vue";
-import FifthRow from "./fifthRow/FifthRow.vue";
+import RecentOrderTable from "./fifthRow/RecentOrderTable.vue";
 const listSaleIcon: Array<SaleIcon> = [
   {
     icon: ["fas", "money-bill"],
