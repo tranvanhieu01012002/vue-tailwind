@@ -1,5 +1,6 @@
 import DashBoard from "@/views/dashboard/DashBoard.vue";
 import ProductsViewVue from "@/views/products/ProductsView.vue";
+import CreateProductView from "@/views/products/CreateProductView.vue";
 import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
@@ -9,17 +10,30 @@ const routes: Array<RouteRecordRaw> = [
     component: DashBoard,
     meta: {
       layout: "default",
-      breadcrumb: false,
     },
   },
   {
-    name: "products",
     path: "/products",
-    component: ProductsViewVue,
     meta: {
       layout: "default",
-      breadcrumb: true,
     },
+    children: [
+      {
+        path: "product-list",
+        component: ProductsViewVue,
+        name: "products-list",
+      },
+      {
+        path: "categories",
+        component: ProductsViewVue,
+        name: "categories",
+      },
+      {
+        path: "create",
+        component: CreateProductView,
+        name: "create-product",
+      },
+    ],
   },
 ];
 export default routes;

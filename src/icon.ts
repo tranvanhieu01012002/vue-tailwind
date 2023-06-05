@@ -28,6 +28,9 @@ import {
   faMagnifyingGlass,
   faCalendarDays,
   faTrash,
+  faCheck,
+  faDownload,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -54,7 +57,10 @@ library.add(
   faAngleRight,
   faMagnifyingGlass,
   faCalendarDays,
-  faTrash
+  faTrash,
+  faCheck,
+  faDownload,
+  faPlus
 );
 
 export default FontAwesomeIcon;

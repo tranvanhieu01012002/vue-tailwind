@@ -1,10 +1,8 @@
 <template>
   <PaddingComponent>
-    <template #title>recent order</template>
     <template #right>
       <div class="btn-group">
         <FilterButton />
-        <ButtonComponent :style="'btn-primary'"> see more </ButtonComponent>
       </div>
     </template>
     <template #content>

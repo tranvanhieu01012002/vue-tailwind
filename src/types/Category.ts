@@ -1,7 +1,7 @@
 type Category = {
   name: string;
   icon: string[];
-  isActive: boolean;
-  link: string;
+  link?: string;
+  children?: Category[];
 };
 export { Category };
