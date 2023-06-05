@@ -1,32 +1,36 @@
 import { HeaderTable } from "@/types";
-
-const headerData: HeaderTable = {
+const header: HeaderTable = {
   theme: "bg-gray-400",
   grid: 9,
   thead: [
     {
-      name: "product",
-      sortIcon: true,
-      span: 2,
-    },
-    {
-      name: "sku",
-      customCss: "uppercase",
-      span: 1,
-    },
-    {
-      name: "category",
+      name: "order ID",
       sortIcon: false,
       span: 1,
     },
     {
-      name: "stock",
-      span: 1,
+      name: "products",
       sortIcon: true,
+      span: 2,
     },
     {
-      name: "price",
+      name: "date",
       sortIcon: true,
+      span: 1,
+    },
+    {
+      name: "customers",
+      sortIcon: false,
+      span: 1,
+    },
+    {
+      name: "total",
+      sortIcon: true,
+      span: 1,
+    },
+    {
+      name: "payment",
+      sortIcon: false,
       span: 1,
     },
     {
@@ -35,16 +39,10 @@ const headerData: HeaderTable = {
       span: 1,
     },
     {
-      name: "added",
+      name: "status",
       sortIcon: true,
-      span: 1,
-    },
-    {
-      name: "action",
-      sortIcon: false,
       span: 1,
     },
   ],
 };
-
-export { headerData };
+export { header };

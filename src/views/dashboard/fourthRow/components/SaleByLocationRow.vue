@@ -11,7 +11,7 @@
     </div>
     <div class="right">
       <div class="price pt-2">
-        <span><strong>$2033</strong></span>
+        <span class="mr-3"><strong>$2033</strong></span>
         <SpanStatusComponent>+20</SpanStatusComponent>
       </div>
     </div>

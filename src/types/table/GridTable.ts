@@ -1,5 +1,5 @@
 interface GridTable {
-  gird?: string;
+  grid?: number;
 }
 
 export { GridTable };

@@ -8,147 +8,8 @@
       </div>
     </template>
     <template #content>
-      <div class="capitalize w-full mt-5">
-        <div class="grid grid-cols-10 bg-gray-300">
-          <div class="py-5">
-            <label class="flex ml-5">
-              <div class="input">
-                <input type="checkbox" class="w-5 h-5" />
-              </div>
-              <div class="ml-3">order ID</div>
-            </label>
-          </div>
-          <div class="col-span-2 py-5">product</div>
-          <div class="py-5">date</div>
-          <div class="col-span-2 py-5">customer</div>
-          <div class="py-5">total</div>
-          <div class="py-5">payment</div>
-          <div class="py-5">status</div>
-          <div class="py-5">action</div>
-        </div>
-        <div class="grid grid-cols-10 odd:bg-gray-300 hover:bg-gray-400">
-          <div class="py-5">
-            <label class="flex ml-5">
-              <div class="input">
-                <input type="checkbox" class="w-5 h-5" />
-              </div>
-              <div class="ml-3">
-                <span class="text-blue-500"> #43423</span>
-              </div>
-            </label>
-          </div>
-          <div class="py-2 col-span-2">
-            <div class="product-cell flex mt-2">
-              <div class="img h-12 w-12">
-                <img src="@/assets/img/products/Img.png" alt="" />
-              </div>
-              <div class="content text-sm ml-2">
-                <div class="content--name">IPhone</div>
-                <div class="content--sku text-gray-custom-100">SKU:300032</div>
-              </div>
-            </div>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <div class="">2 minutes</div>
-          </div>
-          <div class="pt-3 text-gray-custom-100 col-span-2">
-            <div class="customer">
-              <strong>Join Abc</strong>
-            </div>
-            <small class="text-gray-custom-100">abc@gmail.com</small>
-          </div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">
-            <SpanStatusComponent>Delivery</SpanStatusComponent>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <font-awesome-icon class="h-6 w-6 mr-3" :icon="['fas', 'eye']" />
-            <font-awesome-icon class="h-6 w-6" :icon="['fas', 'pencil']" />
-          </div>
-        </div>
-        <div class="grid grid-cols-10 odd:bg-gray-300 hover:bg-gray-400">
-          <div class="py-5">
-            <label class="flex ml-5">
-              <div class="input">
-                <input type="checkbox" class="w-5 h-5" />
-              </div>
-              <div class="ml-3">
-                <span class="text-blue-500"> #43423</span>
-              </div>
-            </label>
-          </div>
-          <div class="py-2 col-span-2">
-            <div class="product-cell flex mt-2">
-              <div class="img h-12 w-12">
-                <img src="@/assets/img/products/Img.png" alt="" />
-              </div>
-              <div class="content text-sm ml-2">
-                <div class="content--name">IPhone</div>
-                <div class="content--sku text-gray-custom-100">SKU:300032</div>
-              </div>
-            </div>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <div class="">2 minutes</div>
-          </div>
-          <div class="pt-3 text-gray-custom-100 col-span-2">
-            <div class="customer">
-              <strong>Join Abc</strong>
-            </div>
-            <small class="text-gray-custom-100">abc@gmail.com</small>
-          </div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">
-            <SpanStatusComponent>Delivery</SpanStatusComponent>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <font-awesome-icon class="h-6 w-6 mr-3" :icon="['fas', 'eye']" />
-            <font-awesome-icon class="h-6 w-6" :icon="['fas', 'pencil']" />
-          </div>
-        </div>
-        <div class="grid grid-cols-10 odd:bg-gray-300 hover:bg-gray-400">
-          <div class="py-5">
-            <label class="flex ml-5">
-              <div class="input">
-                <input type="checkbox" class="w-5 h-5" />
-              </div>
-              <div class="ml-3">
-                <span class="text-blue-500"> #43423</span>
-              </div>
-            </label>
-          </div>
-          <div class="py-2 col-span-2">
-            <div class="product-cell flex mt-2">
-              <div class="img h-12 w-12">
-                <img src="@/assets/img/products/Img.png" alt="" />
-              </div>
-              <div class="content text-sm ml-2">
-                <div class="content--name">IPhone</div>
-                <div class="content--sku text-gray-custom-100">SKU:300032</div>
-              </div>
-            </div>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <div class="">2 minutes</div>
-          </div>
-          <div class="pt-3 text-gray-custom-100 col-span-2">
-            <div class="customer">
-              <strong>Join Abc</strong>
-            </div>
-            <small class="text-gray-custom-100">abc@gmail.com</small>
-          </div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">2 minutes</div>
-          <div class="py-5 text-gray-custom-100">
-            <SpanStatusComponent>Delivery</SpanStatusComponent>
-          </div>
-          <div class="py-5 text-gray-custom-100">
-            <font-awesome-icon class="h-6 w-6 mr-3" :icon="['fas', 'eye']" />
-            <font-awesome-icon class="h-6 w-6" :icon="['fas', 'pencil']" />
-          </div>
-        </div>
+      <div class="pt-5">
+        <DefaultTable :headers="header" :data="data" :grid="9" />
       </div>
     </template>
     <template #footer>
@@ -161,6 +22,8 @@ import PaddingComponent from "../components/PaddingComponent.vue";
 import FilterButton from "../../../components/button/FilterButton.vue";
 import FooterTable from "@/components/FooterTable.vue";
 import ButtonComponent from "@/components/button/ButtonComponent.vue";
-import SpanStatusComponent from "@/components/SpanStatusComponent.vue";
+import DefaultTable from "@/components/table/DefaultTable.vue";
+import { header } from "./headerData";
+import { data } from "./rows";
 </script>
 <style scoped lang="scss"></style>
