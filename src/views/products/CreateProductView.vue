@@ -6,7 +6,7 @@
         <font-awesome-icon class="mr-1" :icon="['fas', 'xmark']" />
         <span>cancel</span>
       </ButtonComponent>
-      <ButtonComponent @click="clickBtn" :style="'btn-primary'">
+      <ButtonComponent :style="'btn-primary'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">add product</span>
       </ButtonComponent>
@@ -32,7 +32,9 @@
             <template #content>
               <div class="grid grid-flow-row auto-rows-max gap-5">
                 <InputMediaComponent>photos</InputMediaComponent>
-                <!-- <InputMediaComponent>videos</InputMediaComponent> -->
+                <InputMediaComponent :icon-type="'film'"
+                  >videos</InputMediaComponent
+                >
               </div>
             </template>
           </PaddingComponent>

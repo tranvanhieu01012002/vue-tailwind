@@ -1,6 +1,17 @@
 <template>
   <div class="w-full">
     <div class="header">
+      <!-- <div class="grid grid-cols-9 gap-1">
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+        <div class="w-20 h-20 bg-gray-800"></div>
+      </div> -->
       <div
         :class="[headers?.customCss, showGrid(headers.grid)]"
         class="bg-gray-300 capitalize rounded-tr-2xl rounded-tl-2xl"

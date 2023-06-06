@@ -11,13 +11,6 @@
       class="mt-4 flex justify-center items-center w-full h-60 rounded-lg border-dashed border-indigo-200"
     >
       <div class="flex flex-col items-center h-full justify-around">
-        <p
-          class="text-red-400"
-          v-for="(errorFile, index) in errorNameFiles"
-          :key="index"
-        >
-          {{ errorFile }}
-        </p>
         <CircleIcon v-if="files.length == 0" :icon-style="icon" />
         <div class="img-show flex">
           <div v-for="(file, index) in files" :key="index" class="img relative">
@@ -43,7 +36,18 @@
 <script setup lang="ts">
 import CircleIcon from "@/components/icon/CircleIcon.vue";
 import ButtonComponent from "../button/ButtonComponent.vue";
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
+import { useNotification } from "@/hooks";
+import { ToastStatus } from "@/enums";
+
+const props = defineProps({
+  iconType: {
+    type: String,
+    required: false,
+    default: "image",
+  },
+});
+const { notify } = useNotification();
 
 const allowedExtension = [
   "image/jpeg",
@@ -56,9 +60,8 @@ const allowedExtension = [
 const input = ref();
 const isDragging = ref(false);
 const files = ref([]);
-const errorNameFiles = ref<string[]>([]);
 const icon = {
-  icon: ["fas", "image"],
+  icon: ["fas", props.iconType],
   borderInside: "bg-violet-400",
   borderOutside: "bg-violet-200",
   color: "text-primary",
@@ -98,7 +101,7 @@ const onChange = () => {
     if (allowedExtension.indexOf(file.type) > -1) {
       files.value.push(file as never);
     } else {
-      errorNameFiles.value.push(file.name);
+      notify(`can not push file ${file.name}`, ToastStatus.ERROR);
     }
   });
 };

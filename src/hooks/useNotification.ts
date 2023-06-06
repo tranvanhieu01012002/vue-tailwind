@@ -1,14 +1,16 @@
 import { useToast } from "vue-toast-notification";
-
+import { ToastStatus } from "@/enums";
 const useNotification = () => {
   const POSITION = "top-right";
-  const TYPE = "success";
 
-  const open = (message: string) => {
+  const notify = (message: string, type = ToastStatus.SUCCESS) => {
     useToast().open({
       message,
-      type: TYPE,
+      type,
       position: POSITION,
     });
   };
+  return { notify };
 };
+
+export { useNotification };
