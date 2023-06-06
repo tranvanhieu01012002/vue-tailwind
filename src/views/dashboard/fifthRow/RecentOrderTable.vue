@@ -8,9 +8,7 @@
       </div>
     </template>
     <template #content>
-      <div class="pt-5">
-        <DefaultTable :headers="header" :data="data" :grid="9" />
-      </div>
+      <DefaultTable :headers="header" :data="data" :grid="9" />
     </template>
     <template #footer>
       <FooterTable />

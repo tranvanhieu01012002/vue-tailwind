@@ -95,7 +95,7 @@ const showGrid = (grid: number): string => {
 };
 
 const showColSpan = (span: number): string => {
-  return `col-span-${span}`;
+  return span == 1 ? "" : `col-span-${span}`;
 };
 </script>
 <style scoped lang="scss"></style>

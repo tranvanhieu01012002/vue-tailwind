@@ -1,41 +1,39 @@
 <template>
-  <div class="dashboard grid grid-flow-row auto-rows-max gap-y-8">
-    <!--Start First row -->
-    <div class="flex justify-between">
-      <TimeBar />
-      <ButtonGroup />
-    </div>
-    <!--End First row -->
-    <!-- Start Second row -->
-    <div class="list-sale grid xl:grid-cols-4 md:grid-cols-2 gap-8">
-      <SaleInfo
-        v-for="(saleIcon, index) in listSaleIcon"
-        :key="index"
-        :icon-style="saleIcon"
-        :sale-info="listSaleInfo[index]"
-      />
-    </div>
-    <!-- End Second row -->
-    <!-- Start Third row -->
-    <div class="grid grid-cols-12 gap-8">
-      <SaleProgress class="col-span-4" />
-      <AnalysisChart class="col-span-8" />
-    </div>
-    <!-- End Third row -->
-    <!-- Start Fourth row -->
-    <div class="grid grid-cols-12 gap-8">
-      <SellingTable class="col-span-8" />
-      <SaleByLocation class="col-span-4" />
-    </div>
-
-    <div class="w-full">
-      <RecentOrderTable />
-    </div>
-    <!-- End Fourth row -->
+  <!--Start First row -->
+  <div class="flex justify-between">
+    <TimeBar />
+    <ButtonGroup />
   </div>
+  <!--End First row -->
+  <!-- Start Second row -->
+  <div class="list-sale grid xl:grid-cols-4 md:grid-cols-2 gap-8">
+    <SaleInfo
+      v-for="(saleIcon, index) in listSaleIcon"
+      :key="index"
+      :icon-style="saleIcon"
+      :sale-info="listSaleInfo[index]"
+    />
+  </div>
+  <!-- End Second row -->
+  <!-- Start Third row -->
+  <div class="grid grid-cols-12 gap-8">
+    <SaleProgress class="col-span-4" />
+    <AnalysisChart class="col-span-8" />
+  </div>
+  <!-- End Third row -->
+  <!-- Start Fourth row -->
+  <div class="grid grid-cols-12 gap-8">
+    <SellingTable class="col-span-8" />
+    <SaleByLocation class="col-span-4" />
+  </div>
+
+  <div class="w-full">
+    <RecentOrderTable />
+  </div>
+  <!-- End Fourth row -->
 </template>
 <script setup lang="ts">
-import { SaleIcon, SaleInfo as SaleInfoType } from "@/types";
+import { CircleIcon, SaleInfo as SaleInfoType } from "@/types";
 import ButtonGroup from "./firstRow/ButtonGroup.vue";
 import TimeBar from "./firstRow/TimeBar.vue";
 import SaleInfo from "./secondRow/SaleInfo.vue";
@@ -44,7 +42,7 @@ import AnalysisChart from "./thirdRow/AnalysisChart.vue";
 import SellingTable from "./fourthRow/SellingTable.vue";
 import SaleByLocation from "./fourthRow/SaleByLocation.vue";
 import RecentOrderTable from "./fifthRow/RecentOrderTable.vue";
-const listSaleIcon: Array<SaleIcon> = [
+const listSaleIcon: Array<CircleIcon> = [
   {
     icon: ["fas", "money-bill"],
     borderInside: "bg-violet-400",

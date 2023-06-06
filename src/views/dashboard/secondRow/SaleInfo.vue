@@ -1,20 +1,6 @@
 <template>
   <div class="w-full bg-white rounded-md shadow-lg shadow-gray-400 p-5">
-    <div
-      :class="iconStyle.borderOutside"
-      class="sale-info__icon w-12 h-12 rounded-full flex justify-center items-center"
-    >
-      <div
-        :class="iconStyle.borderInside"
-        class="w-9 h-9 rounded-full flex justify-center items-center"
-      >
-        <font-awesome-icon
-          class="w-6 h-6"
-          :class="iconStyle.color"
-          :icon="iconStyle.icon"
-        />
-      </div>
-    </div>
+    <CircleIcon :icon-style="iconStyle" />
     <div class="sale-info__text text-gray-custom--100 my-4">
       {{ saleInfo.text }}
     </div>
@@ -34,13 +20,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { SaleIcon } from "@/types";
+import { CircleIcon as CircleIconType } from "@/types";
 import { SaleInfo } from "@/types";
 import { PropType, computed, defineProps } from "vue";
 import numeral from "numeral";
+import CircleIcon from "@/components/icon/CircleIcon.vue";
 const props = defineProps({
   iconStyle: {
-    type: Object as PropType<SaleIcon>,
+    type: Object as PropType<CircleIconType>,
     required: true,
   },
   saleInfo: {

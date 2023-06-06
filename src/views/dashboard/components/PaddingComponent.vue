@@ -14,7 +14,7 @@
         <slot name="right"></slot>
       </div>
     </div>
-    <div class="content">
+    <div class="content pt-5">
       <slot name="content"></slot>
     </div>
     <div class="footer"><slot name="footer"></slot></div>

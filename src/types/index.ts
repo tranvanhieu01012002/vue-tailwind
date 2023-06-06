@@ -1,7 +1,8 @@
-export { SaleIcon } from "./Sale";
+export { CircleIcon } from "./CircleIcon";
 export { SaleInfo } from "./SaleInfo";
 export { Category } from "./Category";
 export { Breadcrumb } from "./Breadcrumb";
-export { HeaderTable } from "./table";
 export { CustomCss } from "./CustomCssInterface";
-export { ProductCell } from "./table";
+
+export * from "./table";
+export * from "./input";

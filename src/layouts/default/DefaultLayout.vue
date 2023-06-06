@@ -8,7 +8,11 @@
         <HeaderComponent />
       </div>
       <div class="px-5 py-8">
-        <slot></slot>
+        <div
+          class="container-app products grid grid-flow-row auto-rows-max gap-y-8"
+        >
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>

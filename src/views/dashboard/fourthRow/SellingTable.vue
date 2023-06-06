@@ -3,9 +3,7 @@
     <template #title>Top selling product</template>
     <template #right><FilterButton /></template>
     <template #content>
-      <div class="pt-5">
-        <DefaultTable :headers="header" :data="data" :grid="12" />
-      </div>
+      <DefaultTable :headers="header" :data="data" :grid="12" />
     </template>
     <template #footer>
       <FooterTable />
