@@ -11,18 +11,28 @@
       class="mt-4 flex justify-center items-center w-full h-60 rounded-lg border-dashed border-indigo-200"
     >
       <div class="flex flex-col items-center h-full justify-around">
+        <p
+          class="text-red-400"
+          v-for="(errorFile, index) in errorNameFiles"
+          :key="index"
+        >
+          {{ errorFile }}
+        </p>
         <CircleIcon v-if="files.length == 0" :icon-style="icon" />
         <div class="img-show flex">
-          <div v-for="(file, index) in files" :key="index" class="img">
+          <div v-for="(file, index) in files" :key="index" class="img relative">
             <img
               :draggable="false"
               :src="generateURL(file)"
               class="w-28 h-28 mr-4 rounded-xl"
             />
-            <div class="bg-blue-800 w-2 h-2"></div>
+            <font-awesome-icon
+              class="w-4 h-4 bg-green-300 rounded-full p-1 absolute top-1 right-5"
+              :icon="['fas', 'check']"
+            />
           </div>
         </div>
-        <p class="text-gray-custom-100">Draw and drop image here</p>
+        <p class="text-gray-custom-100">Draw and drop <slot></slot> here</p>
         <ButtonComponent @click="clickBtn" :style="'btn-primary'"
           >Add</ButtonComponent
         >
@@ -35,9 +45,18 @@ import CircleIcon from "@/components/icon/CircleIcon.vue";
 import ButtonComponent from "../button/ButtonComponent.vue";
 import { ref } from "vue";
 
+const allowedExtension = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/gif",
+  "image/bmp",
+];
+
 const input = ref();
 const isDragging = ref(false);
 const files = ref([]);
+const errorNameFiles = ref<string[]>([]);
 const icon = {
   icon: ["fas", "image"],
   borderInside: "bg-violet-400",
@@ -76,7 +95,11 @@ const addNewFiles = (e: any) => {
 
 const onChange = () => {
   [...((input.value as HTMLInputElement).files ?? [])].forEach((file) => {
-    files.value.push(file as never);
+    if (allowedExtension.indexOf(file.type) > -1) {
+      files.value.push(file as never);
+    } else {
+      errorNameFiles.value.push(file.name);
+    }
   });
 };
 </script>
