@@ -17,7 +17,7 @@
     <div class="content pt-5">
       <slot name="content"></slot>
     </div>
-    <div class="footer"><slot name="footer"></slot></div>
+    <div class="footer mt-5"><slot name="footer"></slot></div>
   </div>
 </template>
 <script setup lang="ts"></script>

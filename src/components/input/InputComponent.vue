@@ -9,6 +9,7 @@
         <font-awesome-icon :icon="['fas', icon]" />
       </span>
       <component
+        @input="(event: Event) => emits('type',(event.target as HTMLInputElement).value)"
         :is="inputTag"
         :class="[
           inputTag == Input.TEXTAREA ? '' : 'h-10',
@@ -17,6 +18,7 @@
         class="bg-gray-100 w-full mt-4 px-4"
         :rows="row"
         :placeholder="`${placeholder} ...`"
+        :value="value"
       >
         <option v-for="optionItem in option" :key="optionItem.value">
           {{ optionItem.name }}
@@ -26,7 +28,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, defineProps } from "vue";
+import { PropType, defineProps, defineEmits } from "vue";
 import { InputType, Input } from "@/enums";
 import { Option } from "@/types";
 defineProps({
@@ -58,6 +60,13 @@ defineProps({
     type: String,
     required: false,
   },
+  value: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
+
+const emits = defineEmits(["type"]);
 </script>
 <style scoped lang="scss"></style>

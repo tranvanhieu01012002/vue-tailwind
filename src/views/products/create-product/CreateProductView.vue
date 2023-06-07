@@ -20,6 +20,8 @@
           <MediaComponent />
           <PricingComponent />
           <InventoryComponent />
+          <VariationComponent />
+          <ShippingComponent />
         </div>
       </div>
       <div class="col-span-3">
@@ -41,6 +43,8 @@ import {
   CategoryComponent,
   PricingComponent,
   InventoryComponent,
+  VariationComponent,
+  ShippingComponent,
 } from "./components";
 </script>
 <style scoped lang="scss"></style>

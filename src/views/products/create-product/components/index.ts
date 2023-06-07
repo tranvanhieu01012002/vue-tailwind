@@ -4,6 +4,8 @@ import MediaComponent from "./MediaComponent.vue";
 import StatusComponent from "./StatusComponent.vue";
 import PricingComponent from "./PricingComponent.vue";
 import InventoryComponent from "./InventoryComponent.vue";
+import VariationComponent from "./VariationComponent.vue";
+import ShippingComponent from "./ShippingComponent.vue";
 
 export {
   GeneralInformation,
@@ -12,4 +14,6 @@ export {
   CategoryComponent,
   PricingComponent,
   InventoryComponent,
+  VariationComponent,
+  ShippingComponent,
 };

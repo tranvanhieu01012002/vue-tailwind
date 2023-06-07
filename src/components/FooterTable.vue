@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between border-t-2 border-gray-900 pt-4">
+  <div class="flex justify-between border-t-2 border-gray-900">
     <div class="left text-xl mt-2">
       Show from {{ `${startNumber}-${endNumber}` }} from 20
     </div>
