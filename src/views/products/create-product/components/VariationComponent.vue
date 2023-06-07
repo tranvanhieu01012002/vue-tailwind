@@ -52,7 +52,10 @@ import { ButtonComponent } from "@/components";
 import { Option, Variation } from "@/types";
 import { Input } from "@/enums";
 import { GAP_IN_COMPONENT } from "@/constants";
-import { ref } from "vue";
+import { onMounted, ref, onBeforeUnmount } from "vue";
+import { useProductCompletion } from "@/stores";
+
+const { updateShow } = useProductCompletion();
 
 const dataOption: Option[] = [
   { name: "data1", value: "data1" },
@@ -60,6 +63,13 @@ const dataOption: Option[] = [
   { name: "data3", value: "data3" },
 ];
 
+onMounted(() => {
+  updateShow(true);
+});
+
+onBeforeUnmount(() => {
+  updateShow(false);
+});
 const addNew = () => {
   variations.value.push({ type: "color", value: "red" });
 };
