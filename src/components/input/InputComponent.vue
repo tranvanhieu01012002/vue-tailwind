@@ -1,17 +1,28 @@
 <template>
   <div class="input capitalize">
-    <div class="text-gray-custom-100"><slot></slot></div>
-    <component
-      :is="inputTag"
-      :class="inputTag == Input.TEXTAREA ? '' : 'h-10'"
-      class="bg-gray-100 w-full mt-4 rounded-md px-4"
-      :rows="row"
-      :placeholder="placeholder"
-    >
-      <option v-for="optionItem in option" :key="optionItem.value">
-        {{ optionItem.name }}
-      </option>
-    </component>
+    <div class="text-gray-500"><slot></slot></div>
+    <div class="flex">
+      <span
+        v-if="inputTag == Input.INPUT && icon"
+        class="input-group-text mt-4 pt-2 px-3 bg-gray-100 rounded-tl-md"
+      >
+        <font-awesome-icon :icon="['fas', icon]" />
+      </span>
+      <component
+        :is="inputTag"
+        :class="[
+          inputTag == Input.TEXTAREA ? '' : 'h-10',
+          icon ? 'rounded-r-md' : 'rounded-md',
+        ]"
+        class="bg-gray-100 w-full mt-4 px-4"
+        :rows="row"
+        :placeholder="placeholder"
+      >
+        <option v-for="optionItem in option" :key="optionItem.value">
+          {{ optionItem.name }}
+        </option>
+      </component>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -41,6 +52,10 @@ defineProps({
   },
   option: {
     type: Object as PropType<Option[]>,
+    required: false,
+  },
+  icon: {
+    type: String,
     required: false,
   },
 });

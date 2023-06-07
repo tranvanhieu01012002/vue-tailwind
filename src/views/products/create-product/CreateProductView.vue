@@ -16,78 +16,28 @@
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-9">
         <div class="grid grid-flow-row auto-rows-max gap-8">
-          <PaddingComponent>
-            <template #title>General information</template>
-            <template #content>
-              <div class="grid grid-flow-row auto-rows-max gap-5">
-                <InputComponent> general information </InputComponent>
-                <InputComponent :input-tag="Input.TEXTAREA">
-                  general information
-                </InputComponent>
-              </div>
-            </template>
-          </PaddingComponent>
-          <PaddingComponent>
-            <template #title>media</template>
-            <template #content>
-              <div class="grid grid-flow-row auto-rows-max gap-5">
-                <InputMediaComponent>photos</InputMediaComponent>
-                <InputMediaComponent :icon-type="'film'"
-                  >videos</InputMediaComponent
-                >
-              </div>
-            </template>
-          </PaddingComponent>
+          <GeneralInformation />
+          <MediaComponent />
+          <PricingComponent />
         </div>
       </div>
       <div class="col-span-3">
         <div class="grid grid-flow-row auto-rows-max gap-8">
-          <PaddingComponent>
-            <template #title>Category</template>
-            <template #content>
-              <div class="grid grid-flow-row auto-rows-max gap-5">
-                <InputComponent :input-tag="Input.SELECT" :option="dataOption"
-                  >select category</InputComponent
-                >
-                <InputComponent :input-tag="Input.SELECT" :option="dataOption"
-                  >product tags</InputComponent
-                >
-              </div>
-            </template>
-          </PaddingComponent>
-          <PaddingComponent>
-            <template #title>status</template>
-            <template #right
-              ><SpanStatusComponent>Draft</SpanStatusComponent></template
-            >
-            <template #content>
-              <div class="grid grid-flow-row auto-rows-max gap-5">
-                <InputComponent :input-tag="Input.SELECT" :option="dataOption"
-                  >select category</InputComponent
-                >
-              </div>
-            </template>
-          </PaddingComponent>
+          <CategoryComponent />
+          <StatusComponent />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { ButtonComponent, BreadcrumbDefault } from "@/components";
 import {
-  PaddingComponent,
-  SpanStatusComponent,
-  InputComponent,
-  InputMediaComponent,
-  ButtonComponent,
-  BreadcrumbDefault,
-} from "@/components";
-import { Input } from "@/enums";
-import { Option } from "@/types";
-const dataOption: Option[] = [
-  { name: "data1", value: "data1" },
-  { name: "data2", value: "data2" },
-  { name: "data3", value: "data3" },
-];
+  GeneralInformation,
+  MediaComponent,
+  StatusComponent,
+  CategoryComponent,
+  PricingComponent,
+} from "./components";
 </script>
 <style scoped lang="scss"></style>

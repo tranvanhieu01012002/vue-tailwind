@@ -34,6 +34,7 @@ import {
   faXmark,
   faImage,
   faFilm,
+  faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
 // import { faBarcode } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -66,7 +67,8 @@ library.add(
   faPlus,
   faXmark,
   faImage,
-  faFilm
+  faFilm,
+  faDollarSign
 );
 
 export default FontAwesomeIcon;
