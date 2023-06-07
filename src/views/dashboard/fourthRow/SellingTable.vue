@@ -3,7 +3,7 @@
     <template #title>Top selling product</template>
     <template #right><FilterButton /></template>
     <template #content>
-      <DefaultTable :headers="header" :data="data" :grid="12" />
+      <DefaultTable :headers="header" :data="data" :grid="6" />
     </template>
     <template #footer>
       <FooterTable />

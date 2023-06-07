@@ -1,20 +1,8 @@
 <template>
   <div class="w-full">
-    <div class="header">
-      <!-- <div class="grid grid-cols-9 gap-1">
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-        <div class="w-20 h-20 bg-gray-800"></div>
-      </div> -->
+    <div class="header w-full">
       <div
-        :class="[headers?.customCss, showGrid(headers.grid)]"
-        class="bg-gray-300 capitalize rounded-tr-2xl rounded-tl-2xl"
+        class="bg-gray-300 capitalize rounded-tr-2xl rounded-tl-2xl w-full flex justify-between"
       >
         <div
           v-for="(thead, index) in headers.thead"
@@ -22,7 +10,7 @@
           :class="[
             index == checkboxIndex ? 'flex' : '',
             thead.customCss,
-            showColSpan(thead.span),
+            showBasicFlex(thead.span),
           ]"
           class="py-5"
         >
@@ -37,13 +25,12 @@
       <div
         v-for="(row, indexRow) in data"
         :key="indexRow"
-        :class="showGrid(grid)"
-        class="odd:bg-gray-100 hover:bg-gray-400"
+        class="odd:bg-gray-100 hover:bg-gray-400 flex justify-between"
       >
         <div
           v-for="(item, index) in row"
           :key="index"
-          :class="showColSpan(item.span)"
+          :class="showBasicFlex(item.span)"
           class="pt-5 pb-4 flex"
         >
           <label v-if="index === checkboxIndex" class="mx-5">
@@ -101,12 +88,8 @@ defineProps({
   },
 });
 
-const showGrid = (grid: number): string => {
-  return `grid grid-cols-${grid}`;
-};
-
-const showColSpan = (span: number): string => {
-  return span == 1 ? "" : `col-span-${span}`;
+const showBasicFlex = (grid: number): string => {
+  return `basis-${grid}/6`;
 };
 </script>
 <style scoped lang="scss"></style>
