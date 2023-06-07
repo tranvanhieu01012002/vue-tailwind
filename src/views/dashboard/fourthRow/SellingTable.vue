@@ -11,10 +11,12 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import PaddingComponent from "../components/PaddingComponent.vue";
-import FooterTable from "@/components/FooterTable.vue";
-import FilterButton from "@/components/button/FilterButton.vue";
-import DefaultTable from "@/components/table/DefaultTable.vue";
+import {
+  PaddingComponent,
+  FooterTable,
+  FilterButton,
+  DefaultTable,
+} from "@/components";
 import { header } from "./header";
 import { data } from "./row";
 </script>

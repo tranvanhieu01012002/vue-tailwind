@@ -16,11 +16,13 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import PaddingComponent from "../components/PaddingComponent.vue";
-import FilterButton from "../../../components/button/FilterButton.vue";
-import FooterTable from "@/components/FooterTable.vue";
-import ButtonComponent from "@/components/button/ButtonComponent.vue";
-import DefaultTable from "@/components/table/DefaultTable.vue";
+import {
+  PaddingComponent,
+  FilterButton,
+  FooterTable,
+  ButtonComponent,
+  DefaultTable,
+} from "@/components";
 import { header } from "./headerData";
 import { data } from "./rows";
 </script>

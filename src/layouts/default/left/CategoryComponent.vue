@@ -21,7 +21,7 @@
 </template>
 <script setup lang="ts">
 import { defineProps, PropType } from "vue";
-import ToggleArrow from "@/components/ToggleArrow.vue";
+import { ToggleArrow } from "@/components";
 import { Category } from "@/types";
 defineProps({
   category: {

@@ -74,12 +74,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import BreadcrumbDefault from "@/components/breadcrumb/BreadcrumbDefault.vue";
-import ButtonComponent from "@/components/button/ButtonComponent.vue";
-import PaddingComponent from "../dashboard/components/PaddingComponent.vue";
-import InputComponent from "@/components/input/InputComponent.vue";
-import SpanStatusComponent from "@/components/SpanStatusComponent.vue";
-import InputMediaComponent from "@/components/input/InputMediaComponent.vue";
+import {
+  PaddingComponent,
+  SpanStatusComponent,
+  InputComponent,
+  InputMediaComponent,
+  ButtonComponent,
+  BreadcrumbDefault,
+} from "@/components";
 import { Input } from "@/enums";
 import { Option } from "@/types";
 const dataOption: Option[] = [

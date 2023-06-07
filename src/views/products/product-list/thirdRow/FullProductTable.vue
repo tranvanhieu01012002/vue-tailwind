@@ -14,10 +14,12 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import PaddingComponent from "@/views/dashboard/components/PaddingComponent.vue";
-import DefaultTable from "@/components/table/DefaultTable.vue";
-import FooterTable from "@/components/FooterTable.vue";
-import { headerData } from "@/components/table/headerData";
+import {
+  PaddingComponent,
+  DefaultTable,
+  FooterTable,
+  headerData,
+} from "@/components";
 import { data } from "./rows";
 </script>
 <style scoped lang="scss"></style>

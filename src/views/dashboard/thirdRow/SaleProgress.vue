@@ -42,7 +42,7 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import PaddingComponent from "../components/PaddingComponent.vue";
+import { PaddingComponent } from "@/components";
 import PerCircle from "./components/PerCircle.vue";
 import TextMoney from "./components/TextMoney.vue";
 </script>

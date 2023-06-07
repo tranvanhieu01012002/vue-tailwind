@@ -17,7 +17,7 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import PaddingComponent from "../components/PaddingComponent.vue";
+import { PaddingComponent } from "@/components";
 import SaleByLocationRow from "./components/SaleByLocationRow.vue";
 </script>
 <style scoped lang="scss"></style>

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import PaddingComponent from "../components/PaddingComponent.vue";
+import { PaddingComponent } from "@/components";
 import {
   Chart as ChartJS,
   CategoryScale,

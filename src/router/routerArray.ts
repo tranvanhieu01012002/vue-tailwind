@@ -1,6 +1,6 @@
 import DashBoard from "@/views/dashboard/DashBoard.vue";
-import ProductsViewVue from "@/views/products/ProductsView.vue";
-import CreateProductView from "@/views/products/CreateProductView.vue";
+import ProductsViewVue from "@/views/products/product-list/ProductsView.vue";
+import CreateProductView from "@/views/products/create-product/CreateProductView.vue";
 import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [

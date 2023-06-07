@@ -22,7 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import ToggleArrow from "@/components/ToggleArrow.vue";
+import { ToggleArrow } from "@/components";
 </script>
 <style lang="scss" scoped>
 .user {

@@ -24,7 +24,7 @@ import { CircleIcon as CircleIconType } from "@/types";
 import { SaleInfo } from "@/types";
 import { PropType, computed, defineProps } from "vue";
 import numeral from "numeral";
-import CircleIcon from "@/components/icon/CircleIcon.vue";
+import { CircleIcon } from "@/components";
 const props = defineProps({
   iconStyle: {
     type: Object as PropType<CircleIconType>,

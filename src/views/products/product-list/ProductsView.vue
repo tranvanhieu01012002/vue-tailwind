@@ -31,12 +31,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import SearchDefault from "@/components/search/SearchDefault.vue";
-import ButtonComponent from "@/components/button/ButtonComponent.vue";
-import FilterButton from "@/components/button/FilterButton.vue";
+import {
+  SearchDefault,
+  ButtonComponent,
+  FilterButton,
+  BreadcrumbDefault,
+} from "@/components";
 import FullProductTable from "./thirdRow/FullProductTable.vue";
-import BreadcrumbDefault from "@/components/breadcrumb/BreadcrumbDefault.vue";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
 const clickBtn = () => {
   return router.push({ name: "create-product" });

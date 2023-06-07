@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
-import SpanStatusComponent from "@/components/SpanStatusComponent.vue";
+import { SpanStatusComponent } from "@/components";
 const props = defineProps({
   flag: {
     type: String,

@@ -71,7 +71,7 @@
 import { defineProps } from "vue";
 import ProductCell from "./ProductCell.vue";
 import { SpanStatus } from "@/enums";
-import SpanStatusComponent from "../SpanStatusComponent.vue";
+import { SpanStatusComponent } from "@/components";
 const checkboxIndex = 0;
 defineProps({
   headers: {

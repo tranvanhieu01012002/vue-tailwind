@@ -4,7 +4,7 @@
     <div class="text-gray-custom-100"><slot></slot></div>
     <div
       :draggable="true"
-      @dragenter="dragover"
+      @dragover="dragover"
       @dragleave="dragleave"
       @drop="drop"
       :class="isDragging ? 'border-2 bg-indigo-300' : 'bg-indigo-100'"
@@ -65,7 +65,6 @@ const icon = {
   borderInside: "bg-violet-400",
   borderOutside: "bg-violet-200",
   color: "text-primary",
-  // <font-awesome-icon :icon="['fas', 'film']" />
 };
 
 const clickBtn = () => {
@@ -81,7 +80,7 @@ const dragleave = () => {
 };
 const drop = (e: any) => {
   e.preventDefault();
-  addNewFiles(e);
+  addNewFiles(e.dataTransfer.files);
   isDragging.value = false;
 };
 const generateURL = (file: File) => {
@@ -92,18 +91,25 @@ const generateURL = (file: File) => {
   return fileSrc;
 };
 
-const addNewFiles = (e: any) => {
-  files.value = [...files.value, ...(e.dataTransfer.files as never[])];
+const addNewFiles = (filesInput: FileList | File[]) => {
+  files.value = [...files.value, ...(filesInput as never[])];
 };
 
 const onChange = () => {
-  [...((input.value as HTMLInputElement).files ?? [])].forEach((file) => {
+  const files = [...((input.value as HTMLInputElement).files ?? [])];
+  addNewFiles(validateFile(files));
+};
+
+const validateFile = (inputFile: File[]) => {
+  const validatedFile: File[] = [];
+  [...inputFile].map((file: File) => {
     if (allowedExtension.indexOf(file.type) > -1) {
-      files.value.push(file as never);
+      validatedFile.push(file);
     } else {
       notify(`can not push file ${file.name}`, ToastStatus.ERROR);
     }
   });
+  return validatedFile;
 };
 </script>
 <style scoped lang="scss"></style>

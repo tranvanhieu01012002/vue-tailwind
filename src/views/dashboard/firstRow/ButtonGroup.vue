@@ -26,5 +26,5 @@
   </div>
 </template>
 <script setup lang="ts">
-import ButtonComponent from "@/components/button/ButtonComponent.vue";
+import { ButtonComponent } from "@/components";
 </script>
