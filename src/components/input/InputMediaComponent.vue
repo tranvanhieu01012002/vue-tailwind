@@ -80,7 +80,7 @@ const dragleave = () => {
 };
 const drop = (e: any) => {
   e.preventDefault();
-  addNewFiles(e.dataTransfer.files);
+  addNewFiles(validateFile(e.dataTransfer.files));
   isDragging.value = false;
 };
 const generateURL = (file: File) => {

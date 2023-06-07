@@ -4,7 +4,7 @@
       <LeftBar />
     </div>
     <div class="container-slot">
-      <div class="bg-white">
+      <div class="bg-white sticky top-0">
         <HeaderComponent />
       </div>
       <div class="px-5 py-8">

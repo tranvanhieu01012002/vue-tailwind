@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col justify-between h-screen relative">
+  <div class="flex flex-col justify-between h-screen sticky top-0">
     <div class="top">
       <BranchComponent />
-      <div class="categories nav">
+      <div class="categories nav w-full">
         <template v-for="(category, index) in listCategory" :key="index">
           <CategoryComponent
             :parent-active="data.includes(category.name)"
