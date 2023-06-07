@@ -13,8 +13,8 @@
     </div>
   </div>
   <div class="second-row">
-    <div :class="`grid grid-cols-12 ${GAP_OUT_COMPONENT}`">
-      <div class="col-span-9">
+    <div :class="`grid grid-cols-11 ${GAP_OUT_COMPONENT}`">
+      <div class="col-span-8">
         <div :class="`grid grid-flow-row auto-rows-max ${GAP_OUT_COMPONENT}`">
           <GeneralInformation />
           <MediaComponent />

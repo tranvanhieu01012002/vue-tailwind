@@ -20,14 +20,37 @@
     </div>
   </div>
   <div :class="`second-row grid-cols-3 grid ${GAP_OUT_COMPONENT}`">
-    <CardInfo />
-    <CardInfo />
-    <CardInfo />
+    <CardInfo :content="'added'" :value="'12 Dec 2022'" />
+    <CardInfo :content="'added'" :value="'12 Dec 2022'" />
+    <CardInfo :content="'added'" :value="'12 Dec 2022'" />
+  </div>
+  <div :class="`third-row grid grid-cols-3 ${GAP_OUT_COMPONENT} grid-flow-col`">
+    <PaddingComponent class="col-span-2">
+      <template #title>order list</template>
+      <template #content>
+        <DefaultTable :headers="header" :data="data" :grid="6"
+      /></template>
+    </PaddingComponent>
+    <div :class="`grid grid-rows-2 ${GAP_OUT_COMPONENT}`">
+      <CardInfo
+        :type="'shipping'"
+        content="1833 Bel Meadow Drive, Fontana, California 92335, USA"
+      />
+      <OrderStatus />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { BreadcrumbDefault, ButtonComponent } from "@/components";
+import {
+  BreadcrumbDefault,
+  ButtonComponent,
+  PaddingComponent,
+  DefaultTable,
+} from "@/components";
 import CardInfo from "./second-row/CardInfo.vue";
+import OrderStatus from "./third-row/OrderStatus.vue";
+import { header } from "./headerData";
+import { data } from "./data";
 import { GAP_OUT_COMPONENT } from "@/constants";
 </script>
 <style scoped lang="scss"></style>
