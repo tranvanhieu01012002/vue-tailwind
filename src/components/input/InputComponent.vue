@@ -16,7 +16,7 @@
         ]"
         class="bg-gray-100 w-full mt-4 px-4"
         :rows="row"
-        :placeholder="placeholder"
+        :placeholder="`${placeholder} ...`"
       >
         <option v-for="optionItem in option" :key="optionItem.value">
           {{ optionItem.name }}
@@ -43,7 +43,7 @@ defineProps({
   placeholder: {
     type: String,
     required: false,
-    default: "Input data here...",
+    default: "Input data here",
   },
   row: {
     type: Number,

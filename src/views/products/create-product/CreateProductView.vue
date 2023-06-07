@@ -13,16 +13,17 @@
     </div>
   </div>
   <div class="second-row">
-    <div class="grid grid-cols-12 gap-8">
+    <div :class="`grid grid-cols-12 ${GAP_OUT_COMPONENT}`">
       <div class="col-span-9">
-        <div class="grid grid-flow-row auto-rows-max gap-8">
+        <div :class="`grid grid-flow-row auto-rows-max ${GAP_OUT_COMPONENT}`">
           <GeneralInformation />
           <MediaComponent />
           <PricingComponent />
+          <InventoryComponent />
         </div>
       </div>
       <div class="col-span-3">
-        <div class="grid grid-flow-row auto-rows-max gap-8">
+        <div :class="`grid grid-flow-row auto-rows-max ${GAP_OUT_COMPONENT}`">
           <CategoryComponent />
           <StatusComponent />
         </div>
@@ -32,12 +33,14 @@
 </template>
 <script setup lang="ts">
 import { ButtonComponent, BreadcrumbDefault } from "@/components";
+import { GAP_OUT_COMPONENT } from "@/constants";
 import {
   GeneralInformation,
   MediaComponent,
   StatusComponent,
   CategoryComponent,
   PricingComponent,
+  InventoryComponent,
 } from "./components";
 </script>
 <style scoped lang="scss"></style>

@@ -6,7 +6,9 @@
   </div>
   <!--End First row -->
   <!-- Start Second row -->
-  <div class="list-sale grid xl:grid-cols-4 md:grid-cols-2 gap-8">
+  <div
+    :class="`list-sale grid xl:grid-cols-4 md:grid-cols-2 ${GAP_OUT_COMPONENT}`"
+  >
     <SaleInfo
       v-for="(saleIcon, index) in listSaleIcon"
       :key="index"
@@ -16,13 +18,13 @@
   </div>
   <!-- End Second row -->
   <!-- Start Third row -->
-  <div class="grid grid-cols-12 gap-8">
+  <div :class="`grid grid-cols-12 ${GAP_OUT_COMPONENT}`">
     <SaleProgress class="col-span-4" />
     <AnalysisChart class="col-span-8" />
   </div>
   <!-- End Third row -->
   <!-- Start Fourth row -->
-  <div class="grid grid-cols-12 gap-8">
+  <div :class="`grid grid-cols-12 ${GAP_OUT_COMPONENT}`">
     <SellingTable class="col-span-8" />
     <SaleByLocation class="col-span-4" />
   </div>
@@ -34,6 +36,7 @@
 </template>
 <script setup lang="ts">
 import { CircleIcon, SaleInfo as SaleInfoType } from "@/types";
+import { GAP_OUT_COMPONENT } from "@/constants";
 import ButtonGroup from "./firstRow/ButtonGroup.vue";
 import TimeBar from "./firstRow/TimeBar.vue";
 import SaleInfo from "./secondRow/SaleInfo.vue";

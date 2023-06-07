@@ -6,7 +6,7 @@
         ><SpanStatusComponent>Draft</SpanStatusComponent></template
       >
       <template #content>
-        <div class="grid grid-flow-row auto-rows-max gap-5">
+        <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
           <InputComponent :input-tag="Input.SELECT" :option="dataOption"
             >select category</InputComponent
           >
@@ -17,6 +17,7 @@
 </template>
 <script setup lang="ts">
 import { PaddingComponent, InputComponent } from "@/components";
+import { GAP_IN_COMPONENT } from "@/constants";
 import { Option } from "@/types";
 import { Input } from "@/enums";
 const dataOption: Option[] = [

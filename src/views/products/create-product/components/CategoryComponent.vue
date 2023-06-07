@@ -2,7 +2,7 @@
   <PaddingComponent>
     <template #title>Category</template>
     <template #content>
-      <div class="grid grid-flow-row auto-rows-max gap-5">
+      <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
         <InputComponent :input-tag="Input.SELECT" :option="dataOption">
           select category
         </InputComponent>
@@ -17,6 +17,7 @@
 import { PaddingComponent, InputComponent } from "@/components";
 import { Option } from "@/types";
 import { Input } from "@/enums";
+import { GAP_IN_COMPONENT } from "@/constants";
 const dataOption: Option[] = [
   { name: "data1", value: "data1" },
   { name: "data2", value: "data2" },
