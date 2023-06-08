@@ -3,22 +3,25 @@ import ProductsViewVue from "@/views/products/product-list/ProductsView.vue";
 import CreateProductView from "@/views/products/create-product/CreateProductView.vue";
 import OrderView from "@/views/orders/OrderView.vue";
 import OrderDetailView from "@/views/orders/order-detail/OrderDetailView.vue";
-import CategoryComponent from "@/views/products/categories/CategoryView.vue";
+import CategoryView from "@/views/products/categories/CategoryView.vue";
+import CreateCategoryView from "@/views/products/categories/create-category/CreateCategoryView.vue";
 import { RouteRecordRaw } from "vue-router";
 
+const DEFAULT_LAYOUT = "default";
+const PATH_CREATE = "create";
 const routes: Array<RouteRecordRaw> = [
   {
     name: "dashboard",
     path: "/",
     component: DashBoard,
     meta: {
-      layout: "default",
+      layout: DEFAULT_LAYOUT,
     },
   },
   {
     path: "/products",
     meta: {
-      layout: "default",
+      layout: DEFAULT_LAYOUT,
     },
     children: [
       {
@@ -30,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
             name: "products-list",
           },
           {
-            path: "create",
+            path: PATH_CREATE,
             component: CreateProductView,
             name: "create-product",
           },
@@ -38,15 +41,25 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: "categories",
-        component: CategoryComponent,
-        name: "categories",
+        children: [
+          {
+            path: "",
+            component: CategoryView,
+            name: "categories",
+          },
+          {
+            path: PATH_CREATE,
+            component: CreateCategoryView,
+            name: "create-categories",
+          },
+        ],
       },
     ],
   },
   {
     path: "/orders",
     meta: {
-      layout: "default",
+      layout: DEFAULT_LAYOUT,
     },
     children: [
       {
