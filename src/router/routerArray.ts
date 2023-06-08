@@ -2,7 +2,8 @@ import DashBoard from "@/views/dashboard/DashBoard.vue";
 import ProductsViewVue from "@/views/products/product-list/ProductsView.vue";
 import CreateProductView from "@/views/products/create-product/CreateProductView.vue";
 import OrderView from "@/views/orders/OrderView.vue";
-import OrderDetailView from "@/views/order-detail/OrderDetailView.vue";
+import OrderDetailView from "@/views/orders/order-detail/OrderDetailView.vue";
+import CategoryComponent from "@/views/products/categories/CategoryView.vue";
 import { RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
@@ -22,36 +23,43 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "product-list",
-        component: ProductsViewVue,
-        name: "products-list",
+        children: [
+          {
+            path: "",
+            component: ProductsViewVue,
+            name: "products-list",
+          },
+          {
+            path: "create",
+            component: CreateProductView,
+            name: "create-product",
+          },
+        ],
       },
       {
         path: "categories",
-        component: ProductsViewVue,
+        component: CategoryComponent,
         name: "categories",
-      },
-      {
-        path: "create",
-        component: CreateProductView,
-        name: "create-product",
       },
     ],
   },
   {
-    name: "orders",
     path: "/orders",
-    component: OrderView,
     meta: {
       layout: "default",
     },
-  },
-  {
-    name: "order-detail",
-    path: "/orders/:id",
-    component: OrderDetailView,
-    meta: {
-      layout: "default",
-    },
+    children: [
+      {
+        name: "order",
+        path: "",
+        component: OrderView,
+      },
+      {
+        name: "order-detail",
+        path: ":id",
+        component: OrderDetailView,
+      },
+    ],
   },
 ];
 export default routes;
