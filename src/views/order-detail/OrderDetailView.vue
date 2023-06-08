@@ -24,14 +24,16 @@
     <CardInfo :content="'added'" :value="'12 Dec 2022'" />
     <CardInfo :content="'added'" :value="'12 Dec 2022'" />
   </div>
-  <div :class="`third-row grid grid-cols-3 ${GAP_OUT_COMPONENT} grid-flow-col`">
-    <PaddingComponent class="col-span-2">
-      <template #title>order list</template>
-      <template #content>
-        <DefaultTable :headers="header" :data="data" :grid="6"
-      /></template>
-    </PaddingComponent>
-    <div :class="`grid grid-rows-2 ${GAP_OUT_COMPONENT}`">
+  <div :class="`third-row grid grid-cols-3 ${GAP_OUT_COMPONENT}`">
+    <div class="col-span-2">
+      <PaddingComponent>
+        <template #title>order list</template>
+        <template #content>
+          <DefaultTable :headers="header" :data="data" :grid="6"
+        /></template>
+      </PaddingComponent>
+    </div>
+    <div :class="`grid grid-flow-row ${GAP_OUT_COMPONENT}`">
       <CardInfo
         :type="'shipping'"
         content="1833 Bel Meadow Drive, Fontana, California 92335, USA"
