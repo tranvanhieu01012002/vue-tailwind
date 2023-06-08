@@ -5,6 +5,8 @@ import OrderView from "@/views/orders/OrderView.vue";
 import OrderDetailView from "@/views/orders/order-detail/OrderDetailView.vue";
 import CategoryView from "@/views/products/categories/CategoryView.vue";
 import CreateCategoryView from "@/views/products/categories/create-category/CreateCategoryView.vue";
+import CustomerView from "@/views/customers/CustomerView.vue";
+import CustomerDetailView from "@/views/customers/customer-detail/CustomerDetailView.vue";
 import { RouteRecordRaw } from "vue-router";
 
 const DEFAULT_LAYOUT = "default";
@@ -71,6 +73,30 @@ const routes: Array<RouteRecordRaw> = [
         name: "order-detail",
         path: ":id",
         component: OrderDetailView,
+      },
+    ],
+  },
+  {
+    path: "/customers",
+    meta: {
+      layout: DEFAULT_LAYOUT,
+    },
+    children: [
+      {
+        name: "customer",
+        path: "",
+        component: CustomerView,
+        meta: {
+          layout: DEFAULT_LAYOUT,
+        },
+      },
+      {
+        name: "customer-detail",
+        path: ":id",
+        component: CustomerDetailView,
+        meta: {
+          layout: DEFAULT_LAYOUT,
+        },
       },
     ],
   },

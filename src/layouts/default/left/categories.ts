@@ -32,16 +32,16 @@ const listCategory: Category[] = [
     icon: ["fas", "user"],
     link: "/customers",
   },
-  {
-    name: "sales",
-    icon: ["fas", "shop"],
-    link: "/sales",
-  },
-  {
-    name: "analytics",
-    icon: ["fas", "chart-simple"],
-    link: "/analytics",
-  },
+  // {
+  //   name: "sales",
+  //   icon: ["fas", "shop"],
+  //   link: "/sales",
+  // },
+  // {
+  //   name: "analytics",
+  //   icon: ["fas", "chart-simple"],
+  //   link: "/analytics",
+  // },
 ];
 
 export { listCategory };
