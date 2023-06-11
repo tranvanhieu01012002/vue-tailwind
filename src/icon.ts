@@ -37,7 +37,7 @@ import {
   faDollarSign,
   faFileInvoice,
 } from "@fortawesome/free-solid-svg-icons";
-// import { faBarcode } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle, faApple } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
 library.add(
   faUserSecret,
@@ -70,7 +70,9 @@ library.add(
   faImage,
   faFilm,
   faDollarSign,
-  faFileInvoice
+  faFileInvoice,
+  faGoogle,
+  faApple
 );
 
 export default FontAwesomeIcon;

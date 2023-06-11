@@ -1,7 +1,7 @@
 <template>
   <button
     :class="style"
-    class="btn rounded-md w-40 border-2 border-solid mx-2 py-2 capitalize hover:bg-sky-500"
+    class="btn rounded-md w-40 border-2 border-solid py-2 capitalize hover:bg-sky-500"
     @click="emit('click')"
   >
     <strong><slot></slot></strong>

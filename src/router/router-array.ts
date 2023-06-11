@@ -7,6 +7,7 @@ import CategoryView from "@/views/products/categories/CategoryView.vue";
 import CreateCategoryView from "@/views/products/categories/create-category/CreateCategoryView.vue";
 import CustomerView from "@/views/customers/CustomerView.vue";
 import CustomerDetailView from "@/views/customers/customer-detail/CustomerDetailView.vue";
+import LoginView from "@/views/login/LoginView.vue";
 import { RouteRecordRaw } from "vue-router";
 
 const DEFAULT_LAYOUT = "default";
@@ -99,6 +100,14 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    name: "login",
+    path: "/login",
+    component: LoginView,
+    meta: {
+      layout: "auth",
+    },
   },
 ];
 export default routes;

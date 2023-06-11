@@ -8,7 +8,10 @@
         <div
           class="user-basic-info absolute top-20 flex justify-center flex-col items-center"
         >
-          <img :src="avatar" class="h-48 w-48 rounded-full mt-6" />
+          <img
+            :src="avatar"
+            class="h-48 w-48 rounded-full mt-6 border-solid border-4 border-gray-400"
+          />
           <div class="mt-3">
             <span>linda blair</span>
             <SpanStatusComponent class="ml-2">premium</SpanStatusComponent>

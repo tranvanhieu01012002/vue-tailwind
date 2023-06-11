@@ -5,6 +5,7 @@ import FooterTable from "./FooterTable.vue";
 import PaddingComponent from "./PaddingComponent.vue";
 import ProductCompletion from "./ProductCompletion.vue";
 import TimeBar from "./TimeBar.vue";
+import OrHr from "./OrHr.vue";
 export {
   NumOfNotify,
   ToggleArrow,
@@ -13,6 +14,7 @@ export {
   PaddingComponent,
   ProductCompletion,
   TimeBar,
+  OrHr,
 };
 
 export * from "./breadcrumb";

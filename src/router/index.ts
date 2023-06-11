@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import routes from "./routerArray";
+import routes from "./router-array";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
