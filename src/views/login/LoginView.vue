@@ -5,12 +5,26 @@
       <h2 class="font-bold text-2xl mb-3">Welcome back</h2>
       Start your website in seconds. Don’t have an account? Sign up.
     </div>
-    <div :class="`form grid grid-flow-row ${GAP_IN_COMPONENT}`">
+    <form
+      @submit="click"
+      :class="`form grid grid-flow-row ${GAP_IN_COMPONENT}`"
+    >
       <div :class="`form flex grid-cols-2 ${GAP_IN_COMPONENT}`">
-        <InputComponent class="w-full">
+        <InputComponent
+          class="w-full"
+          :value="email"
+          @type="(value) => (email = value)"
+        >
           <span class="text-boil text-xl">email</span>
         </InputComponent>
-        <InputComponent class="w-full">
+        <InputComponent
+          :value="password"
+          :type="showPassword ? InputType.TEXT : InputType.PASSWORD"
+          @icon-click="activePassword"
+          class="w-full"
+          :icon="showPassword ? 'eye' : 'eye-slash'"
+          @type="(value) => (password = value)"
+        >
           <span class="text-boil text-xl">password</span>
         </InputComponent>
       </div>
@@ -39,12 +53,31 @@
           Sign in to your account
         </ButtonComponent>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 <script setup lang="ts">
 import BranchComponent from "@/layouts/default/left/BranchComponent.vue";
 import { InputComponent, OrHr, ButtonComponent } from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
+import { InputType } from "@/enums";
+import { ref, onMounted } from "vue";
+
+const showPassword = ref(false);
+const email = ref("");
+const password = ref("");
+
+const activePassword = () => {
+  showPassword.value = !showPassword.value;
+};
+
+const click = (e: Event) => {
+  e.preventDefault();
+  alert("pa: " + email.value + " " + password.value);
+};
+
+onMounted(() => {
+  console.log(process.env.VUE_APP_BE_URL);
+});
 </script>
 <style scoped lang="scss"></style>

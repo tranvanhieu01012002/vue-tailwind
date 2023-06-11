@@ -1,15 +1,17 @@
 <template>
   <div class="input capitalize">
-    <div class="text-gray-500"><slot></slot></div>
+    <div class="text-gray-500">
+      <slot></slot>
+    </div>
     <div class="flex">
       <span
         v-if="inputTag == Input.INPUT && icon"
         class="input-group-text mt-4 pt-2 px-3 bg-gray-100 rounded-tl-md"
       >
-        <font-awesome-icon :icon="['fas', icon]" />
+        <font-awesome-icon @click="emits('iconClick')" :icon="['fas', icon]" />
       </span>
       <component
-        @input="(event: Event) => emits('type',(event.target as HTMLInputElement).value)"
+        @input="(event: Event) => emits('type', (event.target as HTMLInputElement).value)"
         :is="inputTag"
         :class="[
           inputTag == Input.TEXTAREA ? '' : 'h-10',
@@ -17,8 +19,9 @@
         ]"
         class="bg-gray-100 w-full mt-4 px-4"
         :rows="row"
-        :placeholder="`${placeholder} ...`"
+        :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
         :value="value"
+        :type="type"
       >
         <option v-for="optionItem in option" :key="optionItem.value">
           {{ optionItem.name }}
@@ -67,6 +70,6 @@ defineProps({
   },
 });
 
-const emits = defineEmits(["type"]);
+const emits = defineEmits(["type", "iconClick"]);
 </script>
 <style scoped lang="scss"></style>

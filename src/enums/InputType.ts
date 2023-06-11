@@ -3,5 +3,6 @@ enum InputType {
   CHECKBOX = "checkbox",
   RADIO = "radio",
   FILE = "file",
+  PASSWORD = "password",
 }
 export { InputType };
