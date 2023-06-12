@@ -31,9 +31,10 @@
       <template #title>customers</template>
       <template #content>
         <DefaultTable
+          v-if="customers.isLoaded"
           @click-icon="(icon, item) => clickBtn(icon, item)"
           :headers="header"
-          :data="data"
+          :data="customers.data"
           :grid="8"
         />
       </template>
@@ -50,12 +51,17 @@ import {
   DefaultTable,
 } from "@/components";
 import { header } from "./header";
-import { data } from "./data";
+// import { data } from "./data";
 
 import { useRouter } from "vue-router";
+import { onMounted, ref } from "vue";
+import { api } from "@/api";
 
 const router = useRouter();
-
+const customers = ref({
+  isLoaded: false,
+  data: [],
+});
 const clickBtn = (icon: number, item: number) => {
   switch (icon) {
     case 0:
@@ -66,8 +72,46 @@ const clickBtn = (icon: number, item: number) => {
   }
 };
 
+onMounted(async () => {
+  const { data } = await api.get("users");
+  customers.value.data = data.data.data.map((item: any) => {
+    delete item.rank;
+    return createArrFromObj(item);
+  });
+  customers.value.isLoaded = true;
+});
+
 const openCustomerDetail = (indexItem: number) => {
   router.push({ name: "customer-detail", params: { id: indexItem } });
+};
+
+const createArrFromObj = (obj: any) => {
+  const arr = [];
+  Object.values(obj).map((item, index) => {
+    if (index > 1) {
+      arr.push(
+        index === 2
+          ? {
+              image:
+                "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/14%20prm.jpeg",
+              name: Object.values(obj)[index - 1],
+              info: item,
+              slot: "product",
+              span: 2,
+            }
+          : { content: item ?? "unknown" }
+      );
+    }
+  });
+  arr.push({
+    action: [
+      ["fas", "eye"],
+      ["fas", "pencil"],
+      ["fas", "trash"],
+    ],
+    span: 1,
+  });
+  return arr;
 };
 </script>
 <style scoped lang="scss"></style>

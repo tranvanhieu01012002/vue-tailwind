@@ -6,4 +6,6 @@ const router = createRouter({
   routes,
 });
 
+// router.beforeEach(())
+
 export default router;

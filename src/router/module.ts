@@ -4,6 +4,7 @@ declare module "vue-router" {
   interface RouteMeta {
     layout?: string;
     breadcrumb?: boolean;
+    requiresAuth: boolean;
   }
 }
 

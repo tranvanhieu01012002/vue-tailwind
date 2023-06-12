@@ -19,12 +19,14 @@ const routes: Array<RouteRecordRaw> = [
     component: DashBoard,
     meta: {
       layout: DEFAULT_LAYOUT,
+      requiresAuth: true,
     },
   },
   {
     path: "/products",
     meta: {
       layout: DEFAULT_LAYOUT,
+      requiresAuth: true,
     },
     children: [
       {
@@ -63,6 +65,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/orders",
     meta: {
       layout: DEFAULT_LAYOUT,
+      requiresAuth: true,
     },
     children: [
       {
@@ -81,23 +84,18 @@ const routes: Array<RouteRecordRaw> = [
     path: "/customers",
     meta: {
       layout: DEFAULT_LAYOUT,
+      requiresAuth: true,
     },
     children: [
       {
         name: "customer",
         path: "",
         component: CustomerView,
-        meta: {
-          layout: DEFAULT_LAYOUT,
-        },
       },
       {
         name: "customer-detail",
         path: ":id",
         component: CustomerDetailView,
-        meta: {
-          layout: DEFAULT_LAYOUT,
-        },
       },
     ],
   },
@@ -107,6 +105,7 @@ const routes: Array<RouteRecordRaw> = [
     component: LoginView,
     meta: {
       layout: "auth",
+      requiresAuth: false,
     },
   },
 ];
