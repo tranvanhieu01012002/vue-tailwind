@@ -3,7 +3,7 @@
     <div :class="`grid grid-cols-2 w-full ${GAP_OUT_COMPONENT}`">
       <div class="left"><slot></slot></div>
       <div class="right w-full">
-        <img :src="image" alt="" class="h-full" />
+        <img :src="image" alt="" class="h-full rounded-md" />
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 import { GAP_OUT_COMPONENT } from "@/constants";
 
 const image =
-  "https://antimatter.vn/wp-content/uploads/2022/11/hinh-anh-gai-xinh-viet-nam.jpg";
+  "https://smartland.vn/wp-content/uploads/2022/11/ban-do-danh-sach-cac-san-bay-tai-viet-nam.jpg";
 </script>
 <style scoped lang="scss">
 .layout {

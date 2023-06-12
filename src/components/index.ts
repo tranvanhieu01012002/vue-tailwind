@@ -6,6 +6,7 @@ import PaddingComponent from "./PaddingComponent.vue";
 import ProductCompletion from "./ProductCompletion.vue";
 import TimeBar from "./TimeBar.vue";
 import OrHr from "./OrHr.vue";
+import FullScreenLoading from "./loading/FullScreenLoading.vue";
 export {
   NumOfNotify,
   ToggleArrow,
@@ -15,6 +16,7 @@ export {
   ProductCompletion,
   TimeBar,
   OrHr,
+  FullScreenLoading,
 };
 
 export * from "./breadcrumb";

@@ -1,5 +1,6 @@
 <template>
   <button
+    :type="type"
     :class="style"
     class="btn rounded-md w-40 border-2 border-solid py-2 capitalize hover:bg-sky-500"
     @click="emit('click')"
@@ -8,9 +9,17 @@
   </button>
 </template>
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
+import { ButtonType } from "@/enums";
+import { defineProps, defineEmits, PropType } from "vue";
 const emit = defineEmits(["click"]);
-defineProps({ style: { type: String, required: false, default: "btn-white" } });
+defineProps({
+  style: { type: String, required: false, default: "btn-white" },
+  type: {
+    type: String as PropType<ButtonType>,
+    required: false,
+    default: ButtonType.BUTTON,
+  },
+});
 </script>
 <style lang="scss" scoped>
 .btn {

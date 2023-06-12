@@ -49,20 +49,33 @@
         <div class="forgot">forgot password</div>
       </div>
       <div class="action">
-        <ButtonComponent :style="'btn-primary'" class="w-full">
+        <ButtonComponent
+          :type="ButtonType.SUBMIT"
+          :style="'btn-primary'"
+          class="w-full"
+        >
           Sign in to your account
         </ButtonComponent>
       </div>
     </form>
+    <FullScreenLoading />
   </div>
 </template>
 <script setup lang="ts">
 import BranchComponent from "@/layouts/default/left/BranchComponent.vue";
-import { InputComponent, OrHr, ButtonComponent } from "@/components";
+import {
+  InputComponent,
+  OrHr,
+  ButtonComponent,
+  FullScreenLoading,
+} from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
-import { InputType } from "@/enums";
-import { ref, onMounted } from "vue";
+import { InputType, ButtonType, ResponseStatus, ToastStatus } from "@/enums";
+import { ref } from "vue";
+import { api } from "@/api";
+import { useNotification } from "@/hooks";
 
+const { notify } = useNotification();
 const showPassword = ref(false);
 const email = ref("");
 const password = ref("");
@@ -71,13 +84,35 @@ const activePassword = () => {
   showPassword.value = !showPassword.value;
 };
 
-const click = (e: Event) => {
+const click = async (e: Event) => {
   e.preventDefault();
-  alert("pa: " + email.value + " " + password.value);
+  await getData();
 };
 
-onMounted(() => {
-  console.log(process.env.VUE_APP_BE_URL);
-});
+const sendInfo = async () => {
+  return await api.post("login", {
+    email: email.value,
+    password: password.value,
+  });
+};
+
+const showStatus = (status: ResponseStatus, message: string) => {
+  if (status === ResponseStatus.SUCCESS) {
+    alert("hello");
+  } else {
+    resetField();
+    notify(message, ToastStatus.ERROR);
+  }
+};
+
+const resetField = () => {
+  email.value = "";
+  password.value = "";
+};
+
+const getData = async () => {
+  const { data } = await sendInfo();
+  showStatus(data.status, data.message);
+};
 </script>
 <style scoped lang="scss"></style>
