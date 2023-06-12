@@ -4,3 +4,4 @@ export { Input } from "./Input";
 export { ToastStatus } from "./ToastStatus";
 export { ButtonType } from "./ButtonType";
 export { ResponseStatus } from "./ResponseStatus";
+export { GeneralInformation } from "./GeneralInformation";

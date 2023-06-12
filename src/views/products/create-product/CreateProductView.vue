@@ -16,7 +16,9 @@
     <div :class="`grid grid-cols-11 ${GAP_OUT_COMPONENT}`">
       <div class="col-span-8">
         <div :class="`grid grid-flow-row auto-rows-max ${GAP_OUT_COMPONENT}`">
-          <GeneralInformation />
+          <GeneralInformation>
+            <template #type>product</template>
+          </GeneralInformation>
           <MediaComponent />
           <PricingComponent />
           <InventoryComponent />

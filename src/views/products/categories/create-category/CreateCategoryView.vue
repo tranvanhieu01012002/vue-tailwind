@@ -6,7 +6,7 @@
         <font-awesome-icon class="mr-1" :icon="['fas', 'download']" />
         <span>cancel</span>
       </ButtonComponent>
-      <ButtonComponent :style="'btn-primary'">
+      <ButtonComponent :style="'btn-primary ml-4'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">save category</span>
       </ButtonComponent>
@@ -21,7 +21,9 @@
       </PaddingComponent>
     </div>
     <div class="col-span-8">
-      <GeneralInformation />
+      <GeneralInformation>
+        <template #type>category</template>
+      </GeneralInformation>
     </div>
   </div>
 </template>
@@ -34,5 +36,10 @@ import {
 } from "@/components";
 import GeneralInformation from "../../create-product/components/GeneralInformation.vue";
 import { GAP_OUT_COMPONENT } from "@/constants";
+import { ref } from "vue";
+
+const name = ref("");
+const desctiption = ref("");
+const files = ref(null);
 </script>
 <style scoped lang="scss"></style>

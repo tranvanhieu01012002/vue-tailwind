@@ -10,23 +10,30 @@ const instance = axios.create({ baseURL, timeout });
 instance.interceptors.request.use(
   (config) => {
     config.headers.Authorization = setupToken();
-    showLoad("start");
+    config.headers.Accept = "application/json";
+    const { start } = useLoadingStore();
+    start();
+    console.log("make request");
     return config;
   },
   (error) => {
-    showLoad("done");
-    return console.log(error);
+    const { done } = useLoadingStore();
+    done();
+    return error;
   }
 );
 
 instance.interceptors.response.use(
   (response) => {
-    showLoad("done");
+    const { done } = useLoadingStore();
+    done();
     return response;
   },
   (error) => {
-    showLoad("startWithTime");
-    return error.response;
+    const { startWithTime } = useLoadingStore();
+    startWithTime(2);
+    console.log(error);
+    return Promise.reject(error);
   }
 );
 
@@ -34,13 +41,4 @@ const setupToken = (): string => {
   return `Bearer ${getToken()}`;
 };
 
-const showLoad = (state: string) => {
-  const { startWithTime, done, start } = useLoadingStore();
-  const loading: any = {
-    start: start(),
-    done: done(),
-    startWithTime: startWithTime(2),
-  };
-  return loading[state];
-};
 export { instance as api };

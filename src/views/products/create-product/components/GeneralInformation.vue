@@ -3,8 +3,14 @@
     <template #title>General information</template>
     <template #content>
       <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
-        <InputComponent> general information </InputComponent>
-        <InputComponent :input-tag="Input.TEXTAREA">
+        <InputComponent :value="name" @type="(value) => (name = value)">
+          <slot name="type"></slot> information
+        </InputComponent>
+        <InputComponent
+          :value="description"
+          @type="(value) => (description = value)"
+          :input-tag="Input.TEXTAREA"
+        >
           general information
         </InputComponent>
       </div>
@@ -15,5 +21,8 @@
 import { PaddingComponent, InputComponent } from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
 import { Input } from "@/enums";
+import { useGeneralInformationStore } from "@/stores";
+import { storeToRefs } from "pinia";
+const { name, description } = storeToRefs(useGeneralInformationStore());
 </script>
 <style scoped lang="scss"></style>
