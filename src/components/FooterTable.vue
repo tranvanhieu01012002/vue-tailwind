@@ -10,7 +10,7 @@
         :class="link.active ? 'active' : 'bg-violet-300'"
         class="ml-2 rounded-md w-10 h-10 hover:bg-violet-500 text-2xl flex justify-center items-center"
       >
-        <button @click="emits('click', link.url)">
+        <button v-if="link.url" @click="emits('click', link.url)">
           <font-awesome-icon
             v-if="showIndex(link.label).includes('fa-solid')"
             :icon="showIndex(link.label)"
