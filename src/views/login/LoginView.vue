@@ -73,12 +73,14 @@ import { GAP_IN_COMPONENT } from "@/constants";
 import { InputType, ButtonType, ResponseStatus, ToastStatus } from "@/enums";
 import { ref } from "vue";
 import { api } from "@/api";
-import { useNotification } from "@/hooks";
+import { useNotification, useToken } from "@/hooks";
+import router from "@/router";
 
 const { notify } = useNotification();
 const showPassword = ref(false);
 const email = ref("");
 const password = ref("");
+const { setToken } = useToken();
 
 const activePassword = () => {
   showPassword.value = !showPassword.value;
@@ -86,7 +88,11 @@ const activePassword = () => {
 
 const click = async (e: Event) => {
   e.preventDefault();
-  await getData();
+  if (email.value == "" && password.value == "") {
+    notify("Opp please input data", ToastStatus.ERROR);
+  } else {
+    await handleData();
+  }
 };
 
 const sendInfo = async () => {
@@ -96,23 +102,20 @@ const sendInfo = async () => {
   });
 };
 
-const showStatus = (status: ResponseStatus, message: string) => {
-  if (status === ResponseStatus.SUCCESS) {
-    alert("hello");
-  } else {
-    resetField();
-    notify(message, ToastStatus.ERROR);
-  }
-};
-
 const resetField = () => {
   email.value = "";
   password.value = "";
 };
 
-const getData = async () => {
+const handleData = async () => {
   const { data } = await sendInfo();
-  showStatus(data.status, data.message);
+  if (data.status === ResponseStatus.SUCCESS) {
+    setToken(data.data.token);
+    router.push({ name: "dashboard" });
+  } else {
+    resetField();
+    notify(data.message, ToastStatus.ERROR);
+  }
 };
 </script>
 <style scoped lang="scss"></style>
