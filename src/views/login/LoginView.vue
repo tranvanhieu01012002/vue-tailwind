@@ -58,17 +58,11 @@
         </ButtonComponent>
       </div>
     </form>
-    <FullScreenLoading />
   </div>
 </template>
 <script setup lang="ts">
 import BranchComponent from "@/layouts/default/left/BranchComponent.vue";
-import {
-  InputComponent,
-  OrHr,
-  ButtonComponent,
-  FullScreenLoading,
-} from "@/components";
+import { InputComponent, OrHr, ButtonComponent } from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
 import { InputType, ButtonType, ResponseStatus, ToastStatus } from "@/enums";
 import { ref } from "vue";

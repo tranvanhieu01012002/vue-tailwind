@@ -38,6 +38,9 @@
           :grid="8"
         />
       </template>
+      <template #footer
+        ><FooterTable @click="(url) => clickBtn(1, url)" :links="links"
+      /></template>
     </PaddingComponent>
   </div>
 </template>
@@ -49,23 +52,29 @@ import {
   FilterButton,
   PaddingComponent,
   DefaultTable,
+  FooterTable,
 } from "@/components";
 import { header } from "./header";
-// import { data } from "./data";
 
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { api } from "@/api";
+import { Link } from "@/types";
 
 const router = useRouter();
 const customers = ref({
   isLoaded: false,
   data: [],
 });
-const clickBtn = (icon: number, item: number) => {
+const links = ref<Link[]>([]);
+
+const clickBtn = (icon: number, item: string) => {
   switch (icon) {
     case 0:
       openCustomerDetail(item);
+      break;
+    case 1:
+      movePage(item);
       break;
     default:
       break;
@@ -73,16 +82,25 @@ const clickBtn = (icon: number, item: number) => {
 };
 
 onMounted(async () => {
-  const { data } = await api.get("users");
+  await handleData();
+});
+
+const handleData = async (queryString = "") => {
+  const { data } = await api.get(`users?${queryString}`);
   customers.value.data = data.data.data.map((item: any) => {
     delete item.rank;
     return createArrFromObj(item);
   });
+  links.value = data.data.links;
   customers.value.isLoaded = true;
-});
+};
 
-const openCustomerDetail = (indexItem: number) => {
+const openCustomerDetail = (indexItem: string) => {
   router.push({ name: "customer-detail", params: { id: indexItem } });
+};
+
+const movePage = async (url: string) => {
+  await handleData(url.split("?")[1]);
 };
 
 const createArrFromObj = (obj: any) => {

@@ -37,6 +37,7 @@ import {
   faDollarSign,
   faFileInvoice,
   faEyeSlash,
+  faAngleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faApple } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -75,7 +76,9 @@ library.add(
   faGoogle,
   faApple,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faAngleLeft,
+  faAngleRight
 );
 
 export default FontAwesomeIcon;
