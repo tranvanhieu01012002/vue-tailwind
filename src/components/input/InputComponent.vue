@@ -10,23 +10,34 @@
       >
         <font-awesome-icon @click="emits('iconClick')" :icon="['fas', icon]" />
       </span>
-      <component
-        @input="(event: Event) => emits('type', (event.target as HTMLInputElement).value)"
-        :is="inputTag"
-        :class="[
-          inputTag == Input.TEXTAREA ? '' : 'h-10',
-          icon ? 'rounded-r-md' : 'rounded-md',
-        ]"
-        class="bg-gray-100 w-full mt-4 px-4"
-        :rows="row"
-        :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
-        :value="value"
-        :type="type"
+      <div
+        class="input w-full"
+        :class="inputTag === Input.TEXTAREA ? 'pb-2' : ''"
       >
-        <option v-for="optionItem in option" :key="optionItem.value">
-          {{ optionItem.name }}
-        </option>
-      </component>
+        <component
+          @input="(event: Event) => typeAction(event)"
+          :is="inputTag"
+          :class="[
+            inputTag == Input.TEXTAREA ? '' : 'h-10',
+            icon ? 'rounded-r-md' : 'rounded-md',
+          ]"
+          class="bg-gray-100 w-full mt-4 px-4"
+          :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
+          :value="value"
+          :type="type"
+          :content="{
+            ops: [
+              { insert: 'The Two Towers' },
+              { insert: '\n', attributes: { header: 1 } },
+              { insert: 'Aragorn sped on up the hill.\n' },
+            ],
+          }"
+        >
+          <option v-for="optionItem in option" :key="optionItem.value">
+            {{ optionItem.name }}
+          </option>
+        </component>
+      </div>
     </div>
   </div>
 </template>
@@ -34,7 +45,7 @@
 import { PropType, defineProps, defineEmits } from "vue";
 import { InputType, Input } from "@/enums";
 import { Option } from "@/types";
-defineProps({
+const props = defineProps({
   inputTag: {
     type: String,
     required: false,
@@ -49,11 +60,6 @@ defineProps({
     type: String,
     required: false,
     default: "Input data here",
-  },
-  row: {
-    type: Number,
-    required: false,
-    default: 10,
   },
   option: {
     type: Object as PropType<Option[]>,
@@ -71,5 +77,14 @@ defineProps({
 });
 
 const emits = defineEmits(["type", "iconClick"]);
+
+const typeAction = (event: Event) => {
+  if (props.inputTag == Input.TEXTAREA) {
+    emits("type", (event.target as HTMLInputElement).innerHTML);
+    console.log((event.target as HTMLInputElement).innerHTML);
+  } else {
+    emits("type", (event.target as HTMLInputElement).value);
+  }
+};
 </script>
 <style scoped lang="scss"></style>

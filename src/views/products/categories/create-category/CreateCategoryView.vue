@@ -68,12 +68,12 @@ const submit = (e: Event) => {
     confirmButtonText: "Save",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire("Saved!", "", "success");
+      Swal.fire(description.value, "", "success");
     } else if (result.isDenied) {
       Swal.fire("Changes are not saved", "", "info");
     }
   });
-  console.log((files.value[0] as File).name, name, description);
+  console.log((files.value[0] as File).name, name, description.value);
 };
 
 const getFiles = (filesInput: []) => {

@@ -9,9 +9,11 @@ import "vue-toast-notification/dist/theme-sugar.css";
 import { createPinia } from "pinia";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import { QuillEditor } from "@vueup/vue-quill";
 const pinia = createPinia();
 
 createApp(App)
+  .component("QuillEditor", QuillEditor)
   .component("default-layout", DefaultLayout)
   .component("auth-layout", AuthLayout)
   .component("font-awesome-icon", FontAwesomeIcon)

@@ -6,7 +6,7 @@
         <font-awesome-icon class="mr-1" :icon="['fas', 'download']" />
         <span>Export</span>
       </ButtonComponent>
-      <ButtonComponent :style="'btn-primary'">
+      <ButtonComponent @click="click" :style="'btn-primary'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">add category</span>
       </ButtonComponent>
@@ -36,6 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import {
   BreadcrumbDefault,
   ButtonComponent,
@@ -47,5 +48,11 @@ import {
 } from "@/components";
 import { header } from "./header";
 import { data } from "./data";
+
+const router = useRouter();
+
+const click = () => {
+  router.push({ name: "create-categories" });
+};
 </script>
 <style scoped lang="scss"></style>
