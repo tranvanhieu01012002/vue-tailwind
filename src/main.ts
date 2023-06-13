@@ -7,7 +7,8 @@ import "@/assets/css/index.css";
 import "vue3-circle-progress/dist/circle-progress.css";
 import "vue-toast-notification/dist/theme-sugar.css";
 import { createPinia } from "pinia";
-
+import "sweetalert2/dist/sweetalert2.min.css";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 const pinia = createPinia();
 
 createApp(App)

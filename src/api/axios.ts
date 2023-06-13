@@ -9,7 +9,7 @@ const instance = axios.create({ baseURL, timeout });
 
 instance.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = setupToken();
+    // config.headers.Authorization = setupToken();
     config.headers.Accept = "application/json";
     const { start } = useLoadingStore();
     start();

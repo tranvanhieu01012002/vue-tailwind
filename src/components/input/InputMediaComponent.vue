@@ -1,7 +1,9 @@
 <template>
   <div class="input capitalize">
     <input @change="onChange" ref="input" multiple class="hidden" type="file" />
-    <div class="text-gray-custom-100"><slot></slot></div>
+    <div class="text-gray-custom-100">
+      <slot></slot>
+    </div>
     <div
       :draggable="true"
       @dragover="dragover"
@@ -36,7 +38,7 @@
 <script setup lang="ts">
 import CircleIcon from "@/components/icon/CircleIcon.vue";
 import ButtonComponent from "../button/ButtonComponent.vue";
-import { ref, defineProps } from "vue";
+import { ref, defineProps, PropType, defineEmits } from "vue";
 import { useNotification } from "@/hooks";
 import { ToastStatus } from "@/enums";
 
@@ -46,8 +48,21 @@ const props = defineProps({
     required: false,
     default: "image",
   },
+  numOfFiles: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  files: {
+    type: Object as PropType<[]>,
+    required: false,
+    // eslint-disable-next-line vue/require-valid-default-prop
+    default: [],
+  },
 });
 const { notify } = useNotification();
+
+const emits = defineEmits(["getFiles"]);
 
 const allowedExtension = [
   "image/jpeg",
@@ -59,7 +74,6 @@ const allowedExtension = [
 
 const input = ref();
 const isDragging = ref(false);
-const files = ref([]);
 const icon = {
   icon: ["fas", props.iconType],
   borderInside: "bg-violet-400",
@@ -91,8 +105,31 @@ const generateURL = (file: File) => {
   return fileSrc;
 };
 
-const addNewFiles = (filesInput: FileList | File[]) => {
-  files.value = [...files.value, ...(filesInput as never[])];
+const addNewFiles = async (filesInput: FileList | File[]) => {
+  let tempFiles = [];
+
+  if (props.numOfFiles >= filesInput.length + props.files?.length) {
+    tempFiles = [...props.files, ...(filesInput as never[])];
+  } else if (filesInput.length >= props.numOfFiles) {
+    tempFiles = [
+      ...(filesInput as never[]).slice(filesInput.length - props.numOfFiles),
+    ];
+  } else {
+    tempFiles = [
+      ...props.files.slice(props.numOfFiles - filesInput.length),
+      ...(filesInput as never[]),
+    ];
+  }
+
+  emits("getFiles", tempFiles);
+  // const file = files.value[0];
+  // const baseURL =
+  // "https://s3-cms-shop.s3.ap-southeast-1.amazonaws.com/images/image.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXQD5DZJM6B3JN6FS%2F20230613%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T061910Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=07020d04d362043486a95ac1537d1132c9d941e9a1f83b0596d939f3eb53950a";
+  // const response = await axios.put("", file, {
+  //   baseURL,
+  //   headers: { "Content-Type": "multipart/form-data" },
+  // });
+  // console.log(response);
 };
 
 const onChange = () => {
@@ -113,3 +150,24 @@ const validateFile = (inputFile: File[]) => {
 };
 </script>
 <style scoped lang="scss"></style>
+<!-- [
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": [
+            "x-amz-server-side-encryption",
+            "x-amz-request-id",
+            "x-amz-id-2"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+] -->
