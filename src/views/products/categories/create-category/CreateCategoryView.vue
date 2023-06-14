@@ -51,7 +51,7 @@ import { useGeneralInformationStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { ButtonType } from "@/enums";
 import Swal from "sweetalert2";
-import { api, fileApi } from "@/api";
+import { authApi, nonAuthAxios } from "@/api";
 import { useNotification } from "@/hooks";
 import { useRouter } from "vue-router";
 
@@ -96,12 +96,12 @@ const setupData = () => {
 };
 
 const getData = async () => {
-  const { data } = await api.post("categories/create", setupData());
+  const { data } = await authApi.post("categories/create", setupData());
   return data;
 };
 
 const postFile = async (url: string) => {
-  const { data } = await fileApi.put("", files.value[0], {
+  const { data } = await nonAuthAxios.put("", files.value[0], {
     baseURL: url,
   });
   return data;

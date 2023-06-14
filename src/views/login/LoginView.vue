@@ -66,7 +66,7 @@ import { InputComponent, OrHr, ButtonComponent } from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
 import { InputType, ButtonType, ResponseStatus, ToastStatus } from "@/enums";
 import { ref } from "vue";
-import { api } from "@/api";
+import { nonAuthApi } from "@/api";
 import { useNotification, useToken } from "@/hooks";
 import router from "@/router";
 
@@ -90,7 +90,7 @@ const click = async (e: Event) => {
 };
 
 const sendInfo = async () => {
-  return await api.post("login", {
+  return await nonAuthApi.post("login", {
     email: email.value,
     password: password.value,
   });

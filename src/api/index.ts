@@ -1,2 +1,3 @@
-export { api } from "./baseAxios";
-export { fileApi } from "./fileAxios";
+export { Axios } from "./axios";
+export { nonAuthApi } from "./nonAuthAxios";
+export { authApi } from "./authAxios";

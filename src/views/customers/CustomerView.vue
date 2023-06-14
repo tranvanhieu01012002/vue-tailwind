@@ -58,7 +58,7 @@ import { header } from "./header";
 
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
-import { api } from "@/api";
+import { authApi } from "@/api";
 import { Link } from "@/types";
 
 const router = useRouter();
@@ -86,7 +86,7 @@ onMounted(async () => {
 });
 
 const handleData = async (queryString = "") => {
-  const { data } = await api.get(`users?${queryString}`);
+  const { data } = await authApi.get(`users?${queryString}`);
   customers.value.data = data.data.data.map((item: any) => {
     delete item.rank;
     return createArrFromObj(item);
