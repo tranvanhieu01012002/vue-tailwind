@@ -51,6 +51,12 @@ import { useGeneralInformationStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { ButtonType } from "@/enums";
 import Swal from "sweetalert2";
+import { api, fileApi } from "@/api";
+import { useNotification } from "@/hooks";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const { notify } = useNotification();
 const { name, description } = storeToRefs(useGeneralInformationStore());
 
 const files = ref([]);
@@ -66,18 +72,48 @@ const submit = (e: Event) => {
     title: "Do you want to save?",
     showCancelButton: true,
     confirmButtonText: "Save",
-  }).then((result) => {
+  }).then(async (result) => {
     if (result.isConfirmed) {
-      Swal.fire(description.value, "", "success");
+      await handleUpload();
     } else if (result.isDenied) {
       Swal.fire("Changes are not saved", "", "info");
     }
   });
-  console.log((files.value[0] as File).name, name, description.value);
 };
 
 const getFiles = (filesInput: []) => {
   files.value = filesInput;
+};
+
+const setupData = () => {
+  const formData = new FormData();
+  files.value.map((item: File, index) =>
+    formData.append(`file[${index}]`, item.name)
+  );
+  formData.append("name", name.value);
+  formData.append("description", description.value);
+  return formData;
+};
+
+const getData = async () => {
+  const { data } = await api.post("categories/create", setupData());
+  return data;
+};
+
+const postFile = async (url: string) => {
+  const { data } = await fileApi.put("", files.value[0], {
+    baseURL: url,
+  });
+  return data;
+};
+
+const handleUpload = async () => {
+  const response = await getData();
+  if (response.data.url) {
+    await postFile(response.data.url);
+  }
+  notify(response.message);
+  router.push({ name: "categories" });
 };
 </script>
 <style scoped lang="scss"></style>

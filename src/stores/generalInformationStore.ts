@@ -14,11 +14,15 @@ const useGeneralInformationStore = defineStore(
       description: description.value,
     });
 
+    const setDescription = (descriptionInput: string) => {
+      description.value = descriptionInput;
+    };
+
     const setType = (typeInput: GeneralInformation) => {
       type.value = typeInput;
     };
 
-    return { name, description, type, getInfo, setType };
+    return { name, description, type, getInfo, setType, setDescription };
   }
 );
 export { useGeneralInformationStore };

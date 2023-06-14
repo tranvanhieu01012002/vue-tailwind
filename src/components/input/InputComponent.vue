@@ -12,7 +12,7 @@
       </span>
       <div
         class="input w-full"
-        :class="inputTag === Input.TEXTAREA ? 'pb-2' : ''"
+        :class="inputTag === Input.TEXTAREA ? 'pb-8' : ''"
       >
         <component
           @input="(event: Event) => typeAction(event)"
@@ -25,13 +25,9 @@
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
           :value="value"
           :type="type"
-          :content="{
-            ops: [
-              { insert: 'The Two Towers' },
-              { insert: '\n', attributes: { header: 1 } },
-              { insert: 'Aragorn sped on up the hill.\n' },
-            ],
-          }"
+          :contentType="'html'"
+          :toolbar="toolbarOptions"
+          :content="value"
         >
           <option v-for="optionItem in option" :key="optionItem.value">
             {{ optionItem.name }}
@@ -79,12 +75,48 @@ const props = defineProps({
 const emits = defineEmits(["type", "iconClick"]);
 
 const typeAction = (event: Event) => {
-  if (props.inputTag == Input.TEXTAREA) {
-    emits("type", (event.target as HTMLInputElement).innerHTML);
-    console.log((event.target as HTMLInputElement).innerHTML);
-  } else {
-    emits("type", (event.target as HTMLInputElement).value);
+  switch (props.inputTag) {
+    case Input.TEXTAREA:
+      emits("type", (event.target as HTMLInputElement).innerHTML);
+      break;
+    default:
+      emits("type", (event.target as HTMLInputElement).value);
+      break;
   }
 };
+
+const colors = [
+  "Red",
+  "Orange",
+  "Yellow",
+  "Green",
+  "Blue",
+  "Purple",
+  "Pink",
+  "Brown",
+  "Black",
+  "White",
+  "Gold",
+  "Silver",
+  "Coral",
+  "Turquoise",
+  "Magenta",
+  "Cyan",
+  "Beige",
+  "Lavender",
+  "Maroon",
+  "Olive",
+];
+const toolbarOptions = [
+  ["bold", "italic", "underline"],
+  ["blockquote", "code-block"],
+  [{ header: 1 }, { header: 2 }],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ script: "sub" }, { script: "super" }],
+  [{ indent: "-1" }, { indent: "+1" }],
+  [{ direction: "rtl" }, { align: [] }],
+  [{ color: colors }, { background: colors }],
+  ["clean"],
+];
 </script>
 <style scoped lang="scss"></style>

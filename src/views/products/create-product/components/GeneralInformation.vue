@@ -8,7 +8,7 @@
         </InputComponent>
         <InputComponent
           :value="description"
-          @type="(value) => (description = value)"
+          @type="(value) => setDescription(value)"
           :input-tag="Input.TEXTAREA"
         >
           general information
@@ -23,6 +23,8 @@ import { GAP_IN_COMPONENT } from "@/constants";
 import { Input } from "@/enums";
 import { useGeneralInformationStore } from "@/stores";
 import { storeToRefs } from "pinia";
+
 const { name, description } = storeToRefs(useGeneralInformationStore());
+const { setDescription } = useGeneralInformationStore();
 </script>
 <style scoped lang="scss"></style>

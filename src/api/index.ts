@@ -1,1 +1,2 @@
-export { api } from "./axios";
+export { api } from "./baseAxios";
+export { fileApi } from "./fileAxios";
