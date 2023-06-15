@@ -107,8 +107,14 @@ const postFile = async (url: string) => {
   return data;
 };
 
+const resetField = () => {
+  name.value = "";
+  description.value = "";
+};
+
 const handleUpload = async () => {
   const response = await getData();
+  resetField();
   if (response.data.url) {
     await postFile(response.data.url);
   }
