@@ -12,6 +12,7 @@
       </span>
       <div
         class="input w-full"
+        :id="id"
         :class="[
           inputTag === Input.TEXTAREA ? 'pb-8' : '',
           inputTag === Input.SELECT ? 'relative' : '',
@@ -27,7 +28,7 @@
               inputTag === Input.SELECT ? 'absolute' : '',
               inputTag === Input.SELECT && !show ? 'hidden' : '',
             ]"
-            class="z-10 w-full"
+            class="w-full z-10"
           >
             <li
               v-for="(item, index) in option"
@@ -56,7 +57,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, defineProps, defineEmits, ref, computed } from "vue";
+import {
+  PropType,
+  defineProps,
+  defineEmits,
+  ref,
+  computed,
+  onMounted,
+  onUnmounted,
+} from "vue";
 import { InputType, Input } from "@/enums";
 import { SelectType } from "@/types";
 const props = defineProps({
@@ -93,6 +102,11 @@ const props = defineProps({
     required: false,
     default: 0,
   },
+  id: {
+    type: String,
+    required: false,
+    default: "input-select-option",
+  },
 });
 const show = ref(false);
 
@@ -120,6 +134,19 @@ const typeAction = (event: Event) => {
   }
 };
 
+onMounted(() => {
+  window.addEventListener("click", checkActive);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", checkActive);
+});
+
+const checkActive = (event: any) => {
+  if (!document.getElementById(props.id)?.contains(event.target)) {
+    show.value = false;
+  }
+};
 const colors = [
   "Red",
   "Orange",

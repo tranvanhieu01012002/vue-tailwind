@@ -10,7 +10,7 @@ const setupToken = (): string => {
 const instance = new Axios();
 
 instance.getEntity().interceptors.request.use((config) => {
-  config.headers["Content-Type"] = "multipart/form-data";
+  config.headers["Content-Type"] = "application/json";
   config.headers.Authorization = setupToken();
   return config;
 });

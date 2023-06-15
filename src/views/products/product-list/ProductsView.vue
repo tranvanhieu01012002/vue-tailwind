@@ -16,12 +16,10 @@
     <div class="search flex justify-between">
       <SearchDefault />
       <div class="btn-group">
-        <ButtonComponent
-          ><font-awesome-icon
-            class="mr-1"
-            :icon="['fas', 'calendar-days']"
-          />Select date</ButtonComponent
-        >
+        <ButtonComponent>
+          <font-awesome-icon class="mr-1" :icon="['fas', 'calendar-days']" />
+          Select date
+        </ButtonComponent>
         <FilterButton />
       </div>
     </div>
@@ -39,7 +37,6 @@ import {
 } from "@/components";
 import FullProductTable from "./thirdRow/FullProductTable.vue";
 import { useRouter } from "vue-router";
-
 const router = useRouter();
 const clickBtn = () => {
   return router.push({ name: "create-product" });

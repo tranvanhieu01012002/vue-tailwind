@@ -50,6 +50,17 @@ import {
 } from "./components";
 import { useGeneralInformationStore } from "@/stores";
 import { storeToRefs } from "pinia";
+import { useProductCompletion } from "@/stores";
+import { onMounted, onBeforeUnmount } from "vue";
+const { updateShow } = useProductCompletion();
+
+onMounted(() => {
+  updateShow(true);
+});
+
+onBeforeUnmount(() => {
+  updateShow(false);
+});
 const { name, description } = storeToRefs(useGeneralInformationStore());
 </script>
 <style scoped lang="scss"></style>

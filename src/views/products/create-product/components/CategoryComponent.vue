@@ -4,6 +4,8 @@
     <template #content>
       <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
         <InputComponent
+          v-if="categories?.length != 0"
+          :id="'category-input'"
           :input-tag="Input.SELECT"
           :option="categories"
           @selected="(value) => (currentCategoryId = value)"
@@ -12,10 +14,11 @@
           select category
         </InputComponent>
         <InputComponent
+          v-if="tags?.length != 0"
           :input-tag="Input.SELECT"
           :option="tags"
           @selected="(value) => (currentTagId = value)"
-          :value="categories ? categories[currentCategoryId].name : 'loading'"
+          :value="tags ? tags[currentTagId].name : 'loading'"
         >
           product tags
         </InputComponent>
@@ -36,9 +39,7 @@ const { categories, tags, currentCategoryId, currentTagId } = storeToRefs(
 const { getCategoriesApi, getTagsApi } = useCategoryStore();
 onMounted(async () => {
   try {
-    const [res1, res2] = await Promise.all([getCategoriesApi(), getTagsApi()]);
-    console.log(res1);
-    console.log(res2);
+    await Promise.all([getCategoriesApi(), getTagsApi()]);
   } catch (error) {
     console.log(error);
   }

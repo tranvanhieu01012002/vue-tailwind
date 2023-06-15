@@ -1,4 +1,4 @@
-import { NameInterface } from "../NameInterface";
+import { NameInterface } from "../BaseInterface/NameInterface";
 
 interface ProductCell extends NameInterface {
   image: string;
