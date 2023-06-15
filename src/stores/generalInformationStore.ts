@@ -22,7 +22,20 @@ const useGeneralInformationStore = defineStore(
       type.value = typeInput;
     };
 
-    return { name, description, type, getInfo, setType, setDescription };
+    const resetField = () => {
+      name.value = "";
+      description.value = "";
+    };
+
+    return {
+      name,
+      description,
+      type,
+      getInfo,
+      setType,
+      setDescription,
+      resetField,
+    };
   }
 );
 export { useGeneralInformationStore };

@@ -58,7 +58,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const { notify } = useNotification();
 const { name, description } = storeToRefs(useGeneralInformationStore());
-
+const { resetField } = useGeneralInformationStore();
 const files = ref([]);
 const form = ref();
 
@@ -105,11 +105,6 @@ const postFile = async (url: string) => {
     baseURL: url,
   });
   return data;
-};
-
-const resetField = () => {
-  name.value = "";
-  description.value = "";
 };
 
 const handleUpload = async () => {

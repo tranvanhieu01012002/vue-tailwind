@@ -6,6 +6,6 @@ export { CustomCss } from "./CustomCssInterface";
 export { Variation } from "./Variation";
 export { UserInfo } from "./UserInfo";
 export { Link } from "./Link";
+export { SelectType } from "./SelectType";
 export * from "./table";
-export * from "./input";
 export * from "./response";

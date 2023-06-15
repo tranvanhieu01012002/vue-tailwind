@@ -48,5 +48,8 @@ import {
   VariationComponent,
   ShippingComponent,
 } from "./components";
+import { useGeneralInformationStore } from "@/stores";
+import { storeToRefs } from "pinia";
+const { name, description } = storeToRefs(useGeneralInformationStore());
 </script>
 <style scoped lang="scss"></style>

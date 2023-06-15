@@ -122,14 +122,6 @@ const addNewFiles = async (filesInput: FileList | File[]) => {
   }
 
   emits("getFiles", tempFiles);
-  // const file = files.value[0];
-  // const baseURL =
-  // "https://s3-cms-shop.s3.ap-southeast-1.amazonaws.com/images/image.png?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXQD5DZJM6B3JN6FS%2F20230613%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T061910Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Signature=07020d04d362043486a95ac1537d1132c9d941e9a1f83b0596d939f3eb53950a";
-  // const response = await axios.put("", file, {
-  //   baseURL,
-  //   headers: { "Content-Type": "multipart/form-data" },
-  // });
-  // console.log(response);
 };
 
 const onChange = () => {

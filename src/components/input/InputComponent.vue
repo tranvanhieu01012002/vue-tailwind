@@ -12,35 +12,53 @@
       </span>
       <div
         class="input w-full"
-        :class="inputTag === Input.TEXTAREA ? 'pb-8' : ''"
+        :class="[
+          inputTag === Input.TEXTAREA ? 'pb-8' : '',
+          inputTag === Input.SELECT ? 'relative' : '',
+        ]"
       >
+        <template v-if="inputTag === Input.SELECT">
+          <button @click="show = !show" :class="showCss" type="button">
+            {{ value }}
+            <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
+          </button>
+          <ul
+            :class="[
+              inputTag === Input.SELECT ? 'absolute' : '',
+              inputTag === Input.SELECT && !show ? 'hidden' : '',
+            ]"
+            class="z-10 w-full"
+          >
+            <li
+              v-for="(item, index) in option"
+              class="py-3 bg-gray-100 w-full hover:bg-gray-400 text-center align-middle"
+              @click="updateData(index)"
+              :key="index"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </template>
         <component
+          v-else
           @input="(event: Event) => typeAction(event)"
           :is="inputTag"
-          :class="[
-            inputTag == Input.TEXTAREA ? '' : 'h-10',
-            icon ? 'rounded-r-md' : 'rounded-md',
-          ]"
-          class="bg-gray-100 w-full mt-4 px-4"
+          :class="showCss"
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
           :value="value"
           :type="type"
           :contentType="'html'"
           :toolbar="toolbarOptions"
           :content="value"
-        >
-          <option v-for="optionItem in option" :key="optionItem.value">
-            {{ optionItem.name }}
-          </option>
-        </component>
+        />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { PropType, defineProps, defineEmits } from "vue";
+import { PropType, defineProps, defineEmits, ref, computed } from "vue";
 import { InputType, Input } from "@/enums";
-import { Option } from "@/types";
+import { SelectType } from "@/types";
 const props = defineProps({
   inputTag: {
     type: String,
@@ -58,7 +76,7 @@ const props = defineProps({
     default: "Input data here",
   },
   option: {
-    type: Object as PropType<Option[]>,
+    type: Object as PropType<SelectType[]>,
     required: false,
   },
   icon: {
@@ -70,9 +88,26 @@ const props = defineProps({
     required: false,
     default: "",
   },
+  selectedId: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+});
+const show = ref(false);
+
+const updateData = (index: number) => {
+  emits("selected", index);
+  show.value = !show.value;
+};
+
+const showCss = computed(() => {
+  return `${props.inputTag == Input.TEXTAREA ? "" : "h-10"} ${
+    props.icon ? "rounded-r-md" : "rounded-md"
+  } bg-gray-100 w-full mt-4 px-4`;
 });
 
-const emits = defineEmits(["type", "iconClick"]);
+const emits = defineEmits(["type", "iconClick", "selected"]);
 
 const typeAction = (event: Event) => {
   switch (props.inputTag) {

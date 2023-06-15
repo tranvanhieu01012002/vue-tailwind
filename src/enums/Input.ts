@@ -1,6 +1,6 @@
 enum Input {
   INPUT = "input",
   TEXTAREA = "QuillEditor",
-  SELECT = "select",
+  SELECT = "div",
 }
 export { Input };
