@@ -106,21 +106,10 @@ const generateURL = (file: File) => {
 };
 
 const addNewFiles = async (filesInput: FileList | File[]) => {
-  let tempFiles = [];
-
-  if (props.numOfFiles >= filesInput.length + props.files?.length) {
-    tempFiles = [...props.files, ...(filesInput as never[])];
-  } else if (filesInput.length >= props.numOfFiles) {
-    tempFiles = [
-      ...(filesInput as never[]).slice(filesInput.length - props.numOfFiles),
-    ];
-  } else {
-    tempFiles = [
-      ...props.files.slice(props.numOfFiles - filesInput.length),
-      ...(filesInput as never[]),
-    ];
-  }
-
+  const lengthFiles = filesInput.length + props.files.length;
+  let tempFiles = [...props.files, ...(filesInput as never[])].slice(
+    lengthFiles < props.numOfFiles ? 0 : lengthFiles - props.numOfFiles
+  );
   emits("getFiles", tempFiles);
 };
 
