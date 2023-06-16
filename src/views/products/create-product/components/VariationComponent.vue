@@ -11,25 +11,33 @@
           <InputComponent
             class="col-span-5"
             :input-tag="Input.SELECT"
-            :option="dataOption"
-            :value="'data1'"
+            :option="variationsType"
+            :value="variation.name"
+            @selected="
+              (indexVariationType) =>
+                updateVariationFromIndexType(
+                  index,
+                  variation,
+                  indexVariationType
+                )
+            "
           >
-            {{ variation.type }}
+            variation type
           </InputComponent>
           <InputComponent
             class="col-span-5"
             :value="variation.value"
+            :placeholder="'variation'"
             @type="
               (valueInput) =>
-                updateValue(index, { ...variation, value: valueInput })
+                updateVariation(index, { ...variation, value: valueInput })
             "
-            :placeholder="'variation'"
           >
             variation
           </InputComponent>
           <div class="flex justify-end h-full w-full flex-col">
             <button
-              @click="removeItem(index)"
+              @click="removeVariation(index)"
               class="bg-red-300 h-10 w-10 rounded-md"
             >
               X
@@ -39,7 +47,7 @@
       </div>
     </template>
     <template #footer>
-      <ButtonComponent @click="addNew" :style="'btn-primary'">
+      <ButtonComponent @click="createVariation" :style="'btn-primary'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">Add product</span>
       </ButtonComponent>
@@ -47,46 +55,34 @@
   </PaddingComponent>
 </template>
 <script setup lang="ts">
-import { PaddingComponent, InputComponent } from "@/components";
-import { ButtonComponent } from "@/components";
-import { Option, Variation } from "@/types";
+import {
+  PaddingComponent,
+  InputComponent,
+  ButtonComponent,
+} from "@/components";
 import { Input } from "@/enums";
 import { GAP_IN_COMPONENT } from "@/constants";
-import { onMounted, ref, onBeforeUnmount } from "vue";
-import { useProductCompletion } from "@/stores";
+import { onMounted } from "vue";
+import { useVariationStore } from "@/stores";
+import { storeToRefs } from "pinia";
+import { Variation } from "@/types";
 
-const { updateShow } = useProductCompletion();
+const { getVariationApi, createVariation, removeVariation, updateVariation } =
+  useVariationStore();
+const { variationsType, variations } = storeToRefs(useVariationStore());
 
-const dataOption: Option[] = [
-  { name: "data1", value: "data1" },
-  { name: "data2", value: "data2" },
-  { name: "data3", value: "data3" },
-];
-
-onMounted(() => {
-  updateShow(true);
+const updateVariationFromIndexType = (
+  index: number,
+  currentVariation: Variation,
+  indexVariationType: number
+) => {
+  updateVariation(index, {
+    ...currentVariation,
+    name: variationsType.value[indexVariationType].name,
+  });
+};
+onMounted(async () => {
+  await getVariationApi();
 });
-
-onBeforeUnmount(() => {
-  updateShow(false);
-});
-const addNew = () => {
-  variations.value.push({ type: "color", value: "red" });
-};
-
-const removeItem = (index: number) => {
-  variations.value.splice(index, 1);
-};
-
-const updateValue = (index: number, variation: Variation) => {
-  variations.value[index] = variation;
-};
-
-const variations = ref<Variation[]>([
-  {
-    type: "color",
-    value: "red",
-  },
-]);
 </script>
 <style scoped lang="scss"></style>
