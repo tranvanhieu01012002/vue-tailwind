@@ -27,7 +27,7 @@
               inputTag === Input.SELECT ? 'absolute' : '',
               inputTag === Input.SELECT && !show ? 'hidden' : '',
             ]"
-            class="z-10 w-full"
+            class="w-full z-10"
           >
             <li
               v-for="(item, index) in option"

@@ -9,3 +9,4 @@ export { Link } from "./Link";
 export { SelectType } from "./SelectType";
 export * from "./table";
 export * from "./response";
+export * from "./Discount";

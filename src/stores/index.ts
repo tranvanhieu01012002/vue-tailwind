@@ -5,3 +5,4 @@ export { useCategoryStore } from "./categoryStore";
 export { useMediaStore } from "./mediaStore";
 export { useInventoryStore } from "./inventoryStore";
 export { useVariationStore } from "./variationStore";
+export { usePriceStore } from "./priceStore";
