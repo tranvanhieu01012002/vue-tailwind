@@ -8,17 +8,6 @@
             :parent-active="data.includes(category.name)"
             :category="category"
           />
-          <template
-            v-for="categoryChild in category.children"
-            :key="categoryChild.name"
-          >
-            <CategoryComponent
-              class="subnav"
-              :parent-active="false"
-              v-if="!!category.children"
-              :category="categoryChild"
-            />
-          </template>
         </template>
       </div>
     </div>
@@ -59,9 +48,9 @@ onMounted(() => {
   transform: rotate(360deg);
   transition: all 0.5s ease-in-out 0s;
 }
-.nav:hover .subnav {
-  display: flex;
-}
+// .nav:hover .subnav {
+//   display: flex;
+// }
 .subnav {
   display: none;
 }
