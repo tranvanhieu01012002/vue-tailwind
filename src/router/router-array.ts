@@ -9,9 +9,12 @@ import CustomerView from "@/views/customers/CustomerView.vue";
 import CustomerDetailView from "@/views/customers/customer-detail/CustomerDetailView.vue";
 import LoginView from "@/views/login/LoginView.vue";
 import { RouteRecordRaw } from "vue-router";
+import { AuthMiddleware } from "@/middleware/auth";
 
 const DEFAULT_LAYOUT = "default";
 const PATH_CREATE = "create";
+const auth = new AuthMiddleware();
+
 const routes: Array<RouteRecordRaw> = [
   {
     name: "dashboard",
@@ -19,14 +22,14 @@ const routes: Array<RouteRecordRaw> = [
     component: DashBoard,
     meta: {
       layout: DEFAULT_LAYOUT,
-      requiresAuth: true,
+      middleware: [auth],
     },
   },
   {
     path: "/products",
     meta: {
       layout: DEFAULT_LAYOUT,
-      requiresAuth: true,
+      middleware: [auth],
     },
     children: [
       {
@@ -65,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/orders",
     meta: {
       layout: DEFAULT_LAYOUT,
-      requiresAuth: true,
+      middleware: [auth],
     },
     children: [
       {
@@ -84,7 +87,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/customers",
     meta: {
       layout: DEFAULT_LAYOUT,
-      requiresAuth: true,
+      middleware: [auth],
     },
     children: [
       {
@@ -105,7 +108,6 @@ const routes: Array<RouteRecordRaw> = [
     component: LoginView,
     meta: {
       layout: "auth",
-      requiresAuth: false,
     },
   },
 ];

@@ -18,9 +18,6 @@ import {
   FilterButton,
   DefaultTable,
 } from "@/components";
-import { header } from "./header";
-import { data } from "./row";
-import TyniMce from "../components/TyniMce.vue";
 import { ref } from "vue";
 const editorData = ref("<p>Content of the editor.</p>");
 const input = (value: string) => {
