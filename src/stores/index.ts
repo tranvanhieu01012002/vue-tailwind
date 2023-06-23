@@ -6,3 +6,4 @@ export { useMediaStore } from "./mediaStore";
 export { useInventoryStore } from "./inventoryStore";
 export { useVariationStore } from "./variationStore";
 export { usePriceStore } from "./priceStore";
+export { useUserStore } from "./userStore";

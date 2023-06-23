@@ -38,6 +38,8 @@ import {
   faFileInvoice,
   faEyeSlash,
   faAngleLeft,
+  faAngleDown,
+  faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faApple } from "@fortawesome/free-brands-svg-icons";
 /* add icons to the library */
@@ -78,7 +80,9 @@ library.add(
   faEye,
   faEyeSlash,
   faAngleLeft,
-  faAngleRight
+  faAngleRight,
+  faAngleDown,
+  faAngleUp
 );
 
 export default FontAwesomeIcon;

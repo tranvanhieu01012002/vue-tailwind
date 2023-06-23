@@ -9,6 +9,7 @@
           :class="`mb-4 last:mb-0 row grid grid-cols-11 ${GAP_IN_COMPONENT}`"
         >
           <InputComponent
+            :id="'variation-input'"
             class="col-span-5"
             :input-tag="Input.SELECT"
             :option="variationsType"
@@ -83,6 +84,7 @@ const updateVariationFromIndexType = (
 };
 onMounted(async () => {
   await getVariationApi();
+  console.log(variations.value);
 });
 </script>
 <style scoped lang="scss"></style>

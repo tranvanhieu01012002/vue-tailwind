@@ -1,34 +1,39 @@
 <template>
-  <label>
-    <input type="checkbox" />
-    <div class="arrow">
-      <svg
-        class="h-5 w-5 text-gray-400"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M19 9l-7 7-7-7"
-        />
-      </svg>
-    </div>
-  </label>
+  <div class="arrow-container" @click="toggleArrow">
+    <div class="arrow" :style="{ transform: `rotate(${angle}deg)` }"></div>
+  </div>
 </template>
-<script setup lang="ts"></script>
-<style lang="scss" scoped>
+
+<script>
+export default {
+  data() {
+    return {
+      angle: 0,
+    };
+  },
+  methods: {
+    toggleArrow() {
+      this.angle = this.angle === 0 ? 180 : 0;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.arrow-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .arrow {
-  transition: all 0.35s;
-}
-input {
-  position: absolute;
-  opacity: 0; /* -- 👈 Hide the checkbox */
-  z-index: -1;
-}
-input:checked + .arrow {
-  transform: rotate(180deg);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid black;
+  transition: all 0.3s ease-in-out;
 }
 </style>

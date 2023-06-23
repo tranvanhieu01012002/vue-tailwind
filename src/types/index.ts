@@ -10,3 +10,4 @@ export { SelectType } from "./SelectType";
 export * from "./table";
 export * from "./response";
 export * from "./Discount";
+export * from "./BaseInterface";

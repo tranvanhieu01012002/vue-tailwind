@@ -4,6 +4,8 @@
     <template #content>
       <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
         <InputComponent
+          v-if="categories?.length != 0"
+          :id="'category-input'"
           :input-tag="Input.SELECT"
           :option="categories"
           @selected="(value) => (currentCategoryId = value)"
@@ -12,6 +14,7 @@
           select category
         </InputComponent>
         <InputComponent
+          v-if="tags?.length != 0"
           :input-tag="Input.SELECT"
           :option="tags"
           @selected="(value) => (currentTagId = value)"
