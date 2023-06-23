@@ -15,15 +15,10 @@
         <strong>Hieu tran van</strong>
         <div class="user-info__job">Manager</div>
       </div>
-      <div class="user-info__more pt-5 ml-8">
-        <ToggleArrow />
-      </div>
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { ToggleArrow } from "@/components";
-</script>
+<script setup lang="ts"></script>
 <style lang="scss" scoped>
 .user {
   border-left: 1px solid #0ff;

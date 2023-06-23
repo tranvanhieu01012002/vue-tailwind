@@ -69,13 +69,14 @@ import { ref } from "vue";
 import { nonAuthApi } from "@/api";
 import { useNotification, useToken } from "@/hooks";
 import router from "@/router";
+import { useUserStore } from "@/stores";
 
 const { notify } = useNotification();
 const showPassword = ref(false);
 const email = ref("");
 const password = ref("");
 const { setToken } = useToken();
-
+const { loginSuccess } = useUserStore();
 const activePassword = () => {
   showPassword.value = !showPassword.value;
 };
@@ -105,6 +106,7 @@ const handleData = async () => {
   const { data } = await sendInfo();
   if (data.status === ResponseStatus.SUCCESS) {
     setToken(data.data.token);
+    loginSuccess();
     router.push({ name: "dashboard" });
   } else {
     resetField();
