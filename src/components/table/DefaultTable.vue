@@ -78,17 +78,9 @@ defineProps({
     type: Object,
     required: true,
   },
-  grid: {
-    type: Number,
-    required: true,
-  },
 });
 const checkboxIndex = 0;
 const emit = defineEmits(["clickIcon"]);
-
-const showBasicFlex = (grid: number): string => {
-  return `basis-${grid}/6`;
-};
 </script>
 <style scoped lang="scss"></style>
 <!-- <div class="w-full">
