@@ -11,6 +11,7 @@
           basic price
         </InputComponent>
         <InputComponent
+          :id="'tag-input'"
           :input-tag="Input.SELECT"
           :option="discountsType"
           :value="discountsType.length == 0 ? 'loading' : discountsType[0].name"
@@ -18,6 +19,7 @@
           discount type
         </InputComponent>
         <InputComponent
+          :id="'tax-input'"
           :icon="'dollar-sign'"
           :input-tag="Input.SELECT"
           :option="taxType"

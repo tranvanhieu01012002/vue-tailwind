@@ -38,6 +38,7 @@ const getProducts = async (page = DEFAULT_PAGE) => {
     delete item.barcode;
     delete item.discount;
     delete item.tax_fee;
+    item.categories = "cate_12";
     return createArrFromObj(item);
   });
   links.value = data.data.links;

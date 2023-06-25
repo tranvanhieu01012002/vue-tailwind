@@ -25,7 +25,8 @@ const usePriceStore = defineStore("priceStore", () => {
     try {
       await Promise.all([getDiscountTypeApi(), getTaxTypeApi()]);
     } catch (error) {
-      console.log("error");
+      discountsType.value = [];
+      taxType.value = [];
     }
   };
 

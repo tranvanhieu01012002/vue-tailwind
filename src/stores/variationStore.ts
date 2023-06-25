@@ -1,5 +1,4 @@
 import { authApi } from "@/api";
-import { getUrlWithFieldsIdName } from "@/helpers";
 import { SelectType, Variation } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
@@ -9,7 +8,7 @@ const useVariationStore = defineStore("variationStore", () => {
   const variations = ref<Variation[]>([]);
 
   const getVariationApi = async () => {
-    const { data } = await authApi.get(getUrlWithFieldsIdName("variations"));
+    const { data } = await authApi.get(`variations?fields=id,name,value`);
     variationsType.value = data.data.data;
     setVariations();
   };
@@ -18,7 +17,6 @@ const useVariationStore = defineStore("variationStore", () => {
     variationsType.value.map((item) => {
       variations.value.push({
         ...item,
-        value: "",
       });
     });
   };
