@@ -119,8 +119,11 @@ const setupData = (): FormData => {
       )
     )
   );
-  Object.keys(shippingInfo.value).map((item: keyof ShippingType, index) => {
-    formData.append(`shipping[${index}]`, `${shippingInfo.value[item]}`);
+  Object.keys(shippingInfo.value).map((ship, index) => {
+    formData.append(
+      `shipping[${index}][${ship}]`,
+      `${shippingInfo.value[ship]}`
+    );
   });
   selectedCategories.value.map((category, index) => {
     formData.append(`category[${index}]`, `${category.id}`);
