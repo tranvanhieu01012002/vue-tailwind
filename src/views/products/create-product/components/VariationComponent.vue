@@ -84,7 +84,6 @@ const updateVariationFromIndexType = (
 };
 onMounted(async () => {
   await getVariationApi();
-  console.log(variations.value);
 });
 </script>
 <style scoped lang="scss"></style>

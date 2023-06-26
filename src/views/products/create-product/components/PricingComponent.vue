@@ -16,7 +16,8 @@
           :id="'discount-input'"
           :input-tag="Input.SELECT"
           :option="discountsType"
-          :value="discountsType.length == 0 ? 'loading' : discountsType[0].name"
+          :value="getValue(discountsType, currentDiscountId, 'name')"
+          @selected="(value) => setCurrentDiscountId(value)"
         >
           discount type
         </InputComponent>
@@ -25,19 +26,20 @@
           :icon="'dollar-sign'"
           :input-tag="Input.SELECT"
           :option="taxType"
-          :value="taxType.length == 0 ? 'loading' : taxType[0].name"
+          :value="getValue(taxType, currentTaxId, 'name')"
+          @selected="(value) => setCurrentTaxId(value)"
         >
           tax class
         </InputComponent>
         <InputComponent
-          :value="
-            discountsType.length == 0 ? 'loading' : `${discountsType[0].value}`
-          "
+          :value="getValue(discountsType, currentDiscountId, 'value')"
+          @type="(value) => setValueDiscount(currentDiscountId, value)"
         >
           discount percentage (%)
         </InputComponent>
         <InputComponent
-          :value="taxType.length == 0 ? 'loading' : `${taxType[0].value}`"
+          :value="getValue(taxType, currentTaxId, 'value')"
+          @type="(value) => setValueTax(currentTaxId, value)"
         >
           VAT amount (%)
         </InputComponent>
@@ -52,9 +54,27 @@ import { Input } from "@/enums";
 import { usePriceStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
+import { SelectType } from "@/types";
 
-const { discountsType, taxType, price } = storeToRefs(usePriceStore());
-const { getData, setPrice } = usePriceStore();
+const { discountsType, taxType, price, currentDiscountId, currentTaxId } =
+  storeToRefs(usePriceStore());
+
+const {
+  getData,
+  setPrice,
+  setCurrentDiscountId,
+  setCurrentTaxId,
+  setValueDiscount,
+  setValueTax,
+} = usePriceStore();
+
+const getValue = (
+  list: SelectType[],
+  index: number,
+  property: keyof SelectType
+) => {
+  return list.length === 0 ? "loading" : `${list[index][property]}`;
+};
 
 onMounted(async () => {
   await getData();

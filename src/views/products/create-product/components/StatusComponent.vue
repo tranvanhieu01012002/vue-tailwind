@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="content-status">
     <PaddingComponent>
       <template #title>status</template>
       <template #right>
