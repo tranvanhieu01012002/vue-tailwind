@@ -15,6 +15,7 @@
         </InputComponent>
         <InputComponent
           v-if="tags?.length != 0"
+          :id="'tag-input'"
           :input-tag="Input.SELECT"
           :option="tags"
           @selected="(value) => (currentTagId = value)"

@@ -7,11 +7,13 @@
           class="col-span-2"
           :icon="'dollar-sign'"
           :placeholder="'type base price here'"
+          :value="`${price}`"
+          @type="(value) => setPrice(+value)"
         >
           basic price
         </InputComponent>
         <InputComponent
-          :id="'tag-input'"
+          :id="'discount-input'"
           :input-tag="Input.SELECT"
           :option="discountsType"
           :value="discountsType.length == 0 ? 'loading' : discountsType[0].name"
@@ -51,8 +53,8 @@ import { usePriceStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
-const { discountsType, taxType } = storeToRefs(usePriceStore());
-const { getData } = usePriceStore();
+const { discountsType, taxType, price } = storeToRefs(usePriceStore());
+const { getData, setPrice } = usePriceStore();
 
 onMounted(async () => {
   await getData();

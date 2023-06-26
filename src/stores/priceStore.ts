@@ -30,11 +30,16 @@ const usePriceStore = defineStore("priceStore", () => {
     }
   };
 
+  const setPrice = (inputPrice: number) => {
+    price.value = inputPrice;
+  };
+
   return {
     price,
     taxType,
     discountsType,
     getData,
+    setPrice,
   };
 });
 export { usePriceStore };

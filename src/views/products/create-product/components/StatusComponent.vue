@@ -13,7 +13,7 @@
             :id="'status-input'"
             :input-tag="Input.SELECT"
             :option="status"
-            @selected="(value) => (currentStatusId = value)"
+            @selected="(value) => $emit('updateId', value)"
             :value="status[currentStatusId].name"
           >
             select status
@@ -29,18 +29,22 @@ import {
   InputComponent,
   SpanStatusComponent,
 } from "@/components";
-import { GAP_IN_COMPONENT, PRODUCTS_STATUS } from "@/constants";
+import { GAP_IN_COMPONENT } from "@/constants";
 import { Input, SpanStatus } from "@/enums";
 import { SelectType } from "@/types";
-import { ref } from "vue";
-const status = ref<SelectType[]>(
-  Object.values(PRODUCTS_STATUS).map((item: string, index) => ({
-    id: index,
-    name: item,
-    value: item,
-    description: "",
-  }))
-);
-const currentStatusId = ref(0);
+import { PropType, defineProps, defineEmits } from "vue";
+
+defineProps({
+  status: {
+    type: Object as PropType<SelectType[]>,
+    required: true,
+  },
+  currentStatusId: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+});
+defineEmits(["updateId"]);
 </script>
 <style scoped lang="scss"></style>
