@@ -9,7 +9,7 @@
           :class="`mb-4 last:mb-0 row grid grid-cols-11 ${GAP_IN_COMPONENT}`"
         >
           <InputComponent
-            :id="'variation-input'"
+            :id="`variation-input-${index}`"
             class="col-span-5"
             :input-tag="Input.SELECT"
             :option="variationsType"

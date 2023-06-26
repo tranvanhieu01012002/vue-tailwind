@@ -29,13 +29,13 @@
         </InputComponent>
         <InputComponent
           :value="
-            discountsType.length == 0 ? 'loading' : discountsType[0].value
+            discountsType.length == 0 ? 'loading' : `${discountsType[0].value}`
           "
         >
           discount percentage (%)
         </InputComponent>
         <InputComponent
-          :value="taxType.length == 0 ? 'loading' : taxType[0].value"
+          :value="taxType.length == 0 ? 'loading' : `${taxType[0].value}`"
         >
           VAT amount (%)
         </InputComponent>

@@ -2,7 +2,7 @@
   <PaddingComponent>
     <template #title>shipping</template>
     <template #content>
-      <button @click="updateChecked" class="physical-product flex mb-5">
+      <button @click="toggleShipping" class="physical-product flex mb-5">
         <div class="pt-1">
           <input
             :checked="isPhysical"
@@ -16,9 +16,10 @@
       </button>
       <div v-if="isPhysical" :class="`grid-cols-4 grid ${GAP_IN_COMPONENT}`">
         <InputComponent
-          v-for="(value, key) in shipping"
+          v-for="(value, key) in shippingInfo"
           :key="key"
-          :value="value"
+          :value="`${value}`"
+          @type="(inputValue) => update(shippingInfo, key, inputValue)"
         >
           {{ key }}
         </InputComponent>
@@ -29,17 +30,21 @@
 <script setup lang="ts">
 import { PaddingComponent, InputComponent } from "@/components";
 import { GAP_IN_COMPONENT } from "@/constants";
-import { ref } from "vue";
-const isPhysical = ref(false);
-const updateChecked = () => {
-  isPhysical.value = !isPhysical.value;
-};
+import { useShippingStore } from "@/stores/shippingStore";
+import { storeToRefs } from "pinia";
+import { ShippingType } from "@/types";
 
-const shipping = ref({
-  height: "20",
-  width: "20",
-  length: "20",
-  weight: "20",
-});
+const { isPhysical, shippingInfo } = storeToRefs(useShippingStore());
+const { toggleShipping, updateShippingInfo } = useShippingStore();
+
+// dynamic access property here
+const update = (
+  preShipping: ShippingType,
+  key: keyof ShippingType,
+  value: string
+) => {
+  preShipping[key] = +value;
+  updateShippingInfo(preShipping);
+};
 </script>
 <style scoped lang="scss"></style>
