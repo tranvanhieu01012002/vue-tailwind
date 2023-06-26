@@ -46,12 +46,15 @@
           :is="inputTag"
           :class="showCss"
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
-          :value="value"
+          :value="inputValue"
           :type="type"
           :contentType="'html'"
           :toolbar="toolbarOptions"
           :content="value"
         />
+        <p class="help-message" v-show="errorMessage || meta.valid">
+          {{ errorMessage || "sss" }}
+        </p>
       </div>
     </div>
   </div>
@@ -65,9 +68,17 @@ import {
   computed,
   onMounted,
   onUnmounted,
+  toRef,
 } from "vue";
 import { InputType, Input } from "@/enums";
 import { SelectType } from "@/types";
+import { useField } from "vee-validate";
+import * as yup from "yup";
+const schema = yup.object({
+  email: yup.string().required().email(),
+  name: yup.string().required(),
+  password: yup.string().required().min(8),
+});
 const props = defineProps({
   inputTag: {
     type: String,
@@ -107,9 +118,22 @@ const props = defineProps({
     required: false,
     default: "input-select-option",
   },
+  name: {
+    type: String,
+    required: false,
+    default: "input-name",
+  },
 });
 const show = ref(false);
-
+const name = toRef(props, "name");
+const {
+  value: inputValue,
+  errorMessage,
+  handleChange,
+  meta,
+} = useField(name, isRequired, {
+  initialValue: props.value,
+});
 const updateData = (index: number) => {
   emits("selected", index);
   show.value = !show.value;
@@ -123,6 +147,13 @@ const showCss = computed(() => {
 
 const emits = defineEmits(["type", "iconClick", "selected"]);
 
+function isRequired(value: string) {
+  if (value && value.trim()) {
+    return true;
+  }
+  return "This is required";
+}
+
 const typeAction = (event: Event) => {
   switch (props.inputTag) {
     case Input.TEXTAREA:
@@ -130,6 +161,8 @@ const typeAction = (event: Event) => {
       break;
     default:
       emits("type", (event.target as HTMLInputElement).value);
+      console.log(name.value);
+      handleChange((event.target as HTMLInputElement).value);
       break;
   }
 };

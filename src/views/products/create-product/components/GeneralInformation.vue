@@ -3,7 +3,11 @@
     <template #title>General information</template>
     <template #content>
       <div :class="`grid grid-flow-row auto-rows-max ${GAP_IN_COMPONENT}`">
-        <InputComponent :value="name" @type="(value) => (name = value)">
+        <InputComponent
+          :name="'name-input-1'"
+          :value="name"
+          @type="(value) => (name = value)"
+        >
           <slot name="type"></slot> information
         </InputComponent>
         <InputComponent
