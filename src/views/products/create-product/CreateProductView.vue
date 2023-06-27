@@ -1,5 +1,5 @@
 <template>
-  <div class="first-row flex justify-between">
+  <Form class="first-row flex justify-between">
     <BreadcrumbDefault />
     <div class="btn-group mt-6">
       <ButtonComponent :style="'btn-normal'">
@@ -11,7 +11,7 @@
         <span class="">add product</span>
       </ButtonComponent>
     </div>
-  </div>
+  </Form>
   <div class="second-row">
     <div :class="`grid grid-cols-11 ${GAP_OUT_COMPONENT}`">
       <div class="col-span-8">
@@ -62,6 +62,7 @@ import {
   useCategoryStore,
 } from "@/stores";
 import { storeToRefs } from "pinia";
+import { Form } from "vee-validate";
 import { PRODUCTS_STATUS } from "@/constants";
 import { useProductCompletion } from "@/stores";
 import { onMounted, onBeforeUnmount } from "vue";

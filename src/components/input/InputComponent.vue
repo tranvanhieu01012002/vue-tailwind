@@ -53,7 +53,7 @@
           :content="value"
         />
         <p class="help-message" v-show="errorMessage || meta.valid">
-          {{ errorMessage || "sss" }}
+          {{ errorMessage }}
         </p>
       </div>
     </div>
@@ -131,7 +131,7 @@ const {
   errorMessage,
   handleChange,
   meta,
-} = useField(name, isRequired, {
+} = useField(name, yup.string().required().min(10), {
   initialValue: props.value,
 });
 const updateData = (index: number) => {
@@ -161,7 +161,6 @@ const typeAction = (event: Event) => {
       break;
     default:
       emits("type", (event.target as HTMLInputElement).value);
-      console.log(name.value);
       handleChange((event.target as HTMLInputElement).value);
       break;
   }
