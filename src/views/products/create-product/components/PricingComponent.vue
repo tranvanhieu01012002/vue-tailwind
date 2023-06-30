@@ -42,6 +42,7 @@
         <InputComponent
           :value="getValue(taxType, currentTaxId, 'value')"
           @type="(value) => setValueTax(currentTaxId, value)"
+          :validate="VALIDATION.REQUIRED"
         >
           VAT amount (%)
         </InputComponent>

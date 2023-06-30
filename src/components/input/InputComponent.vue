@@ -44,7 +44,7 @@
           v-else
           @input="(event: Event) => typeAction(event)"
           :is="inputTag"
-          :class="showCss"
+          :class="[showCss, errorMessage ? 'bg-red-200' : '']"
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
           :value="inputValue"
           :type="type"
@@ -75,11 +75,6 @@ import { SelectType } from "@/types";
 import { useField } from "vee-validate";
 import { toolbarOptions } from "./editorConfig";
 import * as yup from "yup";
-// const schema = yup.object({
-//   email: yup.string().required().email(),
-//   name: yup.string().required(),
-//   password: yup.string().required().min(8),
-// });
 const props = defineProps({
   inputTag: {
     type: String,
@@ -141,7 +136,6 @@ const {
   initialValue: props.value,
 });
 
-// yup.string().required().min(10)
 const updateData = (index: number) => {
   emits("selected", index);
   show.value = !show.value;
@@ -154,13 +148,6 @@ const showCss = computed(() => {
 });
 
 const emits = defineEmits(["type", "iconClick", "selected"]);
-
-function isRequired(value: string) {
-  if (value && value.trim()) {
-    return true;
-  }
-  return "This is required";
-}
 
 const typeAction = (event: Event) => {
   switch (props.inputTag) {
@@ -185,13 +172,6 @@ onUnmounted(() => {
 const checkActive = (event: any) => {
   if (!document.getElementById(props.id)?.contains(event.target)) {
     show.value = false;
-  }
-};
-
-const yubValidate = (validate: string[]) => {
-  const y = yup;
-  if (validate[0] == "required") {
-    y.string().required().min(20);
   }
 };
 </script>
