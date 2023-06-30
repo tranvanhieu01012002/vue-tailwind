@@ -52,11 +52,11 @@
           :toolbar="toolbarOptions"
           :content="value"
         />
-        <p class="help-message" v-show="errorMessage || meta.valid">
-          {{ errorMessage }}
-        </p>
       </div>
     </div>
+    <p class="text-red-600" v-show="errorMessage || meta.valid">
+      {{ errorMessage }}
+    </p>
   </div>
 </template>
 <script setup lang="ts">
@@ -73,12 +73,13 @@ import {
 import { InputType, Input } from "@/enums";
 import { SelectType } from "@/types";
 import { useField } from "vee-validate";
+import { toolbarOptions } from "./editorConfig";
 import * as yup from "yup";
-const schema = yup.object({
-  email: yup.string().required().email(),
-  name: yup.string().required(),
-  password: yup.string().required().min(8),
-});
+// const schema = yup.object({
+//   email: yup.string().required().email(),
+//   name: yup.string().required(),
+//   password: yup.string().required().min(8),
+// });
 const props = defineProps({
   inputTag: {
     type: String,
@@ -123,6 +124,11 @@ const props = defineProps({
     required: false,
     default: "input-name",
   },
+  validate: {
+    type: Object as PropType<yup.AnySchema>,
+    required: false,
+    default: undefined,
+  },
 });
 const show = ref(false);
 const name = toRef(props, "name");
@@ -131,9 +137,11 @@ const {
   errorMessage,
   handleChange,
   meta,
-} = useField(name, yup.string().required().min(10), {
+} = useField(name, props.validate, {
   initialValue: props.value,
 });
+
+// yup.string().required().min(10)
 const updateData = (index: number) => {
   emits("selected", index);
   show.value = !show.value;
@@ -179,38 +187,12 @@ const checkActive = (event: any) => {
     show.value = false;
   }
 };
-const colors = [
-  "Red",
-  "Orange",
-  "Yellow",
-  "Green",
-  "Blue",
-  "Purple",
-  "Pink",
-  "Brown",
-  "Black",
-  "White",
-  "Gold",
-  "Silver",
-  "Coral",
-  "Turquoise",
-  "Magenta",
-  "Cyan",
-  "Beige",
-  "Lavender",
-  "Maroon",
-  "Olive",
-];
-const toolbarOptions = [
-  ["bold", "italic", "underline"],
-  ["blockquote", "code-block"],
-  [{ header: 1 }, { header: 2 }],
-  [{ list: "ordered" }, { list: "bullet" }],
-  [{ script: "sub" }, { script: "super" }],
-  [{ indent: "-1" }, { indent: "+1" }],
-  [{ direction: "rtl" }, { align: [] }],
-  [{ color: colors }, { background: colors }],
-  ["clean"],
-];
+
+const yubValidate = (validate: string[]) => {
+  const y = yup;
+  if (validate[0] == "required") {
+    y.string().required().min(20);
+  }
+};
 </script>
 <style scoped lang="scss"></style>

@@ -7,6 +7,7 @@
           :name="'name-input-1'"
           :value="name"
           @type="(value) => (name = value)"
+          :validate="VALIDATION.MIN_6"
         >
           <slot name="type"></slot> information
         </InputComponent>
@@ -27,7 +28,7 @@ import { GAP_IN_COMPONENT } from "@/constants";
 import { Input } from "@/enums";
 import { useGeneralInformationStore } from "@/stores";
 import { storeToRefs } from "pinia";
-
+import { VALIDATION } from "@/constants";
 const { name, description } = storeToRefs(useGeneralInformationStore());
 const { setDescription } = useGeneralInformationStore();
 </script>

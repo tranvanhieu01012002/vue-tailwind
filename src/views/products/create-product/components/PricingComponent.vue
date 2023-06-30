@@ -9,6 +9,7 @@
           :placeholder="'type base price here'"
           :value="`${price}`"
           @type="(value) => setPrice(+value)"
+          :validate="VALIDATION.NUMBER"
         >
           basic price
         </InputComponent>
@@ -34,6 +35,7 @@
         <InputComponent
           :value="getValue(discountsType, currentDiscountId, 'value')"
           @type="(value) => setValueDiscount(currentDiscountId, value)"
+          :validate="VALIDATION.REQUIRED"
         >
           discount percentage (%)
         </InputComponent>
@@ -55,7 +57,7 @@ import { usePriceStore } from "@/stores";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 import { SelectType } from "@/types";
-
+import { VALIDATION } from "@/constants";
 const { discountsType, taxType, price, currentDiscountId, currentTaxId } =
   storeToRefs(usePriceStore());
 
