@@ -126,7 +126,7 @@ const circumference: number = props.progressRadius * 2 * Math.PI;
 
 watch(
   () => props.progress,
-  (newValue, _) => {
+  (newValue) => {
     setTimeout(() => {
       smoothProgressChange(newValue);
     }, props.animationDelay);

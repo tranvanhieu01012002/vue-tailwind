@@ -1,15 +1,17 @@
 import { authApi } from "@/api";
-import { Discount, Tax } from "@/types";
+import { SelectType } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 const usePriceStore = defineStore("priceStore", () => {
   const price = ref(0);
-  const discountsType = ref<Discount[]>([]);
-  const taxType = ref<Tax[]>([]);
+  const discountsType = ref<SelectType[]>([]);
+  const taxType = ref<SelectType[]>([]);
+  const currentDiscountId = ref(0);
+  const currentTaxId = ref(0);
 
   const getDiscountTypeApi = async () => {
-    discountsType.value = await callApi("discounts");
+    discountsType.value = await callApi("discounts?fields=id,name,value");
   };
 
   const getTaxTypeApi = async () => {
@@ -30,11 +32,38 @@ const usePriceStore = defineStore("priceStore", () => {
     }
   };
 
+  const setValueDiscount = (index: number, value: string) => {
+    discountsType.value[index].value = value;
+  };
+
+  const setValueTax = (index: number, value: string) => {
+    taxType.value[index].value = value;
+  };
+
+  const setCurrentDiscountId = (index: number) => {
+    currentDiscountId.value = index;
+  };
+
+  const setCurrentTaxId = (index: number) => {
+    currentTaxId.value = index;
+  };
+
+  const setPrice = (inputPrice: number) => {
+    price.value = inputPrice;
+  };
+
   return {
     price,
     taxType,
     discountsType,
+    currentDiscountId,
+    currentTaxId,
     getData,
+    setPrice,
+    setValueDiscount,
+    setValueTax,
+    setCurrentTaxId,
+    setCurrentDiscountId,
   };
 });
 export { usePriceStore };

@@ -21,7 +21,6 @@ import {
 import { ref } from "vue";
 const editorData = ref("<p>Content of the editor.</p>");
 const input = (value: string) => {
-  console.log("shiw data", value);
   editorData.value = value;
 };
 </script>

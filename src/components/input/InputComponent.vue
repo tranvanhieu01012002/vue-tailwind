@@ -44,9 +44,9 @@
           v-else
           @input="(event: Event) => typeAction(event)"
           :is="inputTag"
-          :class="showCss"
+          :class="[showCss, errorMessage ? 'bg-red-200' : '']"
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
-          :value="value"
+          :value="inputValue"
           :type="type"
           :contentType="'html'"
           :toolbar="toolbarOptions"
@@ -54,6 +54,9 @@
         />
       </div>
     </div>
+    <p class="text-red-600" v-show="errorMessage || meta.valid">
+      {{ errorMessage }}
+    </p>
   </div>
 </template>
 <script setup lang="ts">
@@ -65,9 +68,15 @@ import {
   computed,
   onMounted,
   onUnmounted,
+  toRef,
+  watch,
 } from "vue";
 import { InputType, Input } from "@/enums";
 import { SelectType } from "@/types";
+import { useField } from "vee-validate";
+import { toolbarOptions } from "./editorConfig";
+import { EventBus, EVENT_BUS_LIST } from "@/bus/eventBus";
+import * as yup from "yup";
 const props = defineProps({
   inputTag: {
     type: String,
@@ -107,8 +116,27 @@ const props = defineProps({
     required: false,
     default: "input-select-option",
   },
+  name: {
+    type: String,
+    required: false,
+    default: "input-name",
+  },
+  validate: {
+    type: Object as PropType<yup.AnySchema>,
+    required: false,
+    default: undefined,
+  },
 });
 const show = ref(false);
+const name = toRef(props, "name");
+const {
+  value: inputValue,
+  errorMessage,
+  handleChange,
+  meta,
+} = useField(name, props.validate, {
+  initialValue: props.value,
+});
 
 const updateData = (index: number) => {
   emits("selected", index);
@@ -121,6 +149,14 @@ const showCss = computed(() => {
   } bg-gray-100 w-full mt-4 px-4`;
 });
 
+watch(errorMessage, (newValue) => {
+  if (newValue !== "" && newValue !== undefined) {
+    EventBus.emit(EVENT_BUS_LIST.VALIDATE);
+  } else {
+    EventBus.emit(EVENT_BUS_LIST.REMOVE_VALIDATE);
+  }
+});
+
 const emits = defineEmits(["type", "iconClick", "selected"]);
 
 const typeAction = (event: Event) => {
@@ -130,6 +166,7 @@ const typeAction = (event: Event) => {
       break;
     default:
       emits("type", (event.target as HTMLInputElement).value);
+      handleChange((event.target as HTMLInputElement).value);
       break;
   }
 };
@@ -147,38 +184,5 @@ const checkActive = (event: any) => {
     show.value = false;
   }
 };
-const colors = [
-  "Red",
-  "Orange",
-  "Yellow",
-  "Green",
-  "Blue",
-  "Purple",
-  "Pink",
-  "Brown",
-  "Black",
-  "White",
-  "Gold",
-  "Silver",
-  "Coral",
-  "Turquoise",
-  "Magenta",
-  "Cyan",
-  "Beige",
-  "Lavender",
-  "Maroon",
-  "Olive",
-];
-const toolbarOptions = [
-  ["bold", "italic", "underline"],
-  ["blockquote", "code-block"],
-  [{ header: 1 }, { header: 2 }],
-  [{ list: "ordered" }, { list: "bullet" }],
-  [{ script: "sub" }, { script: "super" }],
-  [{ indent: "-1" }, { indent: "+1" }],
-  [{ direction: "rtl" }, { align: [] }],
-  [{ color: colors }, { background: colors }],
-  ["clean"],
-];
 </script>
 <style scoped lang="scss"></style>

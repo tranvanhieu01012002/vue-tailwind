@@ -7,7 +7,7 @@ export { Variation } from "./Variation";
 export { UserInfo } from "./UserInfo";
 export { Link } from "./Link";
 export { SelectType } from "./SelectType";
+export { ShippingType } from "./ShippingType";
 export * from "./table";
 export * from "./response";
-export * from "./Discount";
 export * from "./BaseInterface";

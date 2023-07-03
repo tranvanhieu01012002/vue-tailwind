@@ -9,7 +9,7 @@
           :class="`mb-4 last:mb-0 row grid grid-cols-11 ${GAP_IN_COMPONENT}`"
         >
           <InputComponent
-            :id="'variation-input'"
+            :id="`variation-input-${index}`"
             class="col-span-5"
             :input-tag="Input.SELECT"
             :option="variationsType"
@@ -29,6 +29,7 @@
             class="col-span-5"
             :value="variation.value"
             :placeholder="'variation'"
+            :validate="VALIDATION.REQUIRED"
             @type="
               (valueInput) =>
                 updateVariation(index, { ...variation, value: valueInput })
@@ -36,14 +37,12 @@
           >
             variation
           </InputComponent>
-          <div class="flex justify-end h-full w-full flex-col">
-            <button
-              @click="removeVariation(index)"
-              class="bg-red-300 h-10 w-10 rounded-md"
-            >
-              X
-            </button>
-          </div>
+          <button
+            @click="removeVariation(index)"
+            class="bg-red-300 h-10 w-10 rounded-md mt-10"
+          >
+            X
+          </button>
         </div>
       </div>
     </template>
@@ -62,7 +61,7 @@ import {
   ButtonComponent,
 } from "@/components";
 import { Input } from "@/enums";
-import { GAP_IN_COMPONENT } from "@/constants";
+import { GAP_IN_COMPONENT, VALIDATION } from "@/constants";
 import { onMounted } from "vue";
 import { useVariationStore } from "@/stores";
 import { storeToRefs } from "pinia";
@@ -84,7 +83,6 @@ const updateVariationFromIndexType = (
 };
 onMounted(async () => {
   await getVariationApi();
-  console.log(variations.value);
 });
 </script>
 <style scoped lang="scss"></style>
