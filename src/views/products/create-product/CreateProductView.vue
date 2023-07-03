@@ -6,7 +6,7 @@
         <font-awesome-icon class="mr-1" :icon="['fas', 'xmark']" />
         <span>cancel</span>
       </ButtonComponent>
-      <ButtonComponent @click="saveProduct" :style="'btn-primary'">
+      <ButtonComponent v-if="error" @click="saveProduct" :style="'btn-primary'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">add product</span>
       </ButtonComponent>
@@ -65,12 +65,12 @@ import { storeToRefs } from "pinia";
 import { Form } from "vee-validate";
 import { PRODUCTS_STATUS } from "@/constants";
 import { useProductCompletion } from "@/stores";
-import { onMounted, onBeforeUnmount } from "vue";
-import { SelectType, ShippingType } from "@/types";
+import { onMounted, onBeforeUnmount, onUnmounted } from "vue";
+import { SelectType } from "@/types";
 import { ref } from "vue";
 import Swal from "sweetalert2";
 import { authApi } from "@/api";
-
+import { useEventBusValidate } from "@/hooks";
 const { updateShow } = useProductCompletion();
 const { name, description } = storeToRefs(useGeneralInformationStore());
 const { images } = storeToRefs(useMediaStore());
@@ -80,7 +80,7 @@ const { SKU, quantity, barcode } = storeToRefs(useInventoryStore());
 const { variations } = storeToRefs(useVariationStore());
 const { shippingInfo } = storeToRefs(useShippingStore());
 const { selectedCategories, selectedTags } = storeToRefs(useCategoryStore());
-
+const { error, startEventBus, stopEventBus } = useEventBusValidate();
 const saveProduct = () => {
   console.log(setupData());
   Swal.fire({
@@ -153,12 +153,16 @@ const postData = async () => {
 
 onMounted(() => {
   updateShow(true);
+  startEventBus();
 });
 
 onBeforeUnmount(() => {
   updateShow(false);
 });
 
+onUnmounted(() => {
+  stopEventBus();
+});
 const updateStatusId = (newId: number) => {
   currentStatusId.value = newId;
 };

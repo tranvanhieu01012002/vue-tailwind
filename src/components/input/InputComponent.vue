@@ -69,11 +69,13 @@ import {
   onMounted,
   onUnmounted,
   toRef,
+  watch,
 } from "vue";
 import { InputType, Input } from "@/enums";
 import { SelectType } from "@/types";
 import { useField } from "vee-validate";
 import { toolbarOptions } from "./editorConfig";
+import { EventBus, EVENT_BUS_LIST } from "@/bus/eventBus";
 import * as yup from "yup";
 const props = defineProps({
   inputTag: {
@@ -145,6 +147,14 @@ const showCss = computed(() => {
   return `${props.inputTag == Input.TEXTAREA ? "" : "h-10"} ${
     props.icon ? "rounded-r-md" : "rounded-md"
   } bg-gray-100 w-full mt-4 px-4`;
+});
+
+watch(errorMessage, (newValue) => {
+  if (newValue !== "" && newValue !== undefined) {
+    EventBus.emit(EVENT_BUS_LIST.VALIDATE);
+  } else {
+    EventBus.emit(EVENT_BUS_LIST.REMOVE_VALIDATE);
+  }
 });
 
 const emits = defineEmits(["type", "iconClick", "selected"]);
