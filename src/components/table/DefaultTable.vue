@@ -18,7 +18,7 @@
     </thead>
     <tbody class="body">
       <tr
-        v-for="(row, indexRow) in data"
+        v-for="(row, indexRow) in showData()"
         :key="indexRow"
         class="odd:bg-gray-100 hover:bg-gray-400"
       >
@@ -69,7 +69,7 @@ import ProductCell from "./ProductCell.vue";
 import { SpanStatus } from "@/enums";
 import { SpanStatusComponent } from "@/components";
 
-defineProps({
+const props = defineProps({
   headers: {
     type: Object,
     required: true,
@@ -79,7 +79,37 @@ defineProps({
     required: true,
   },
 });
+const showData = () => props.data.map((item: any) => createArrFromObj(item));
 const checkboxIndex = 0;
 const emit = defineEmits(["clickIcon"]);
+
+const createArrFromObj = (obj: any) => {
+  const arr = [];
+  console.log("op");
+  Object.values(obj).map((item: any) => {
+    arr.push(
+      typeof item === "object" && item != null
+        ? {
+            image:
+              item.image ??
+              "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/14%20prm.jpeg",
+            name: item.name,
+            info: item.description,
+            slot: "product",
+            span: 2,
+          }
+        : { content: item }
+    );
+  });
+  arr.push({
+    action: [
+      ["fas", "eye"],
+      ["fas", "pencil"],
+      ["fas", "trash"],
+    ],
+    span: 1,
+  });
+  return arr;
+};
 </script>
 <style scoped lang="scss"></style>
