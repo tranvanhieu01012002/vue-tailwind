@@ -38,9 +38,9 @@
           :grid="8"
         />
       </template>
-      <template #footer
-        ><FooterTable @click="(url) => clickBtn(1, url)" :links="links"
-      /></template>
+      <template #footer>
+        <FooterTable @click="(url) => clickBtn(1, url)" :links="links" />
+      </template>
     </PaddingComponent>
   </div>
 </template>

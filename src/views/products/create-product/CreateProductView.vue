@@ -195,7 +195,7 @@ const postData = async () => {
         )
       )
       .catch(() =>
-        useNotification().notify("oh can not upload image", ToastStatus.SUCCESS)
+        useNotification().notify("oh can not upload image", ToastStatus.ERROR)
       );
   }
 };

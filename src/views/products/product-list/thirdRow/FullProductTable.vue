@@ -9,7 +9,7 @@
       <DefaultTable :grid="9" :headers="headerData" :data="products.data" />
     </template>
     <template #footer>
-      <FooterTable />
+      <FooterTable @click="(url) => movePage(url)" :links="links" />
     </template>
   </PaddingComponent>
 </template>
@@ -23,17 +23,16 @@ import {
 } from "@/components";
 import { Link } from "@/types";
 import { onMounted, ref } from "vue";
-import { DEFAULT_PAGE } from "@/helpers";
 const products = ref({
   isLoaded: false,
   data: [],
 });
 const links = ref<Link[]>([]);
 onMounted(async () => {
-  await getProducts();
+  await handleData();
 });
-const getProducts = async (page = DEFAULT_PAGE) => {
-  const { data } = await authApi.get(`products?page=${page}`);
+const handleData = async (page = "") => {
+  const { data } = await authApi.get(`products?${page}`);
   products.value.data = data.data.data.map((item: any) => {
     delete item.barcode;
     delete item.discount;
@@ -42,6 +41,10 @@ const getProducts = async (page = DEFAULT_PAGE) => {
     return createArrFromObj(item);
   });
   links.value = data.data.links;
+};
+
+const movePage = async (url: string) => {
+  await handleData(url.split("?")[1]);
 };
 
 const createArrFromObj = (obj: any) => {

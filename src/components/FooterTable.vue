@@ -1,8 +1,6 @@
 <template>
   <div class="flex justify-between border-t-2 border-gray-900">
-    <div class="left text-xl mt-2">
-      <!-- Show from {{ `${startNumber}-${endNumber}` }} from 20 -->
-    </div>
+    <div class="left text-xl mt-2"></div>
     <div class="right flex flex-row">
       <div
         v-for="(link, index) in links"
