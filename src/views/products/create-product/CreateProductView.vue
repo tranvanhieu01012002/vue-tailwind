@@ -6,7 +6,7 @@
         <font-awesome-icon class="mr-1" :icon="['fas', 'xmark']" />
         <span>cancel</span>
       </ButtonComponent>
-      <ButtonComponent v-if="error" @click="saveProduct" :style="'btn-primary'">
+      <ButtonComponent @click="saveProduct" :style="'btn-primary'">
         <font-awesome-icon class="mr-1" :icon="['fas', 'plus']" />
         <span class="">add product</span>
       </ButtonComponent>
@@ -41,7 +41,6 @@
 </template>
 <script setup lang="ts">
 import { ButtonComponent, BreadcrumbDefault } from "@/components";
-import { GAP_OUT_COMPONENT } from "@/constants";
 import {
   GeneralInformation,
   MediaComponent,
@@ -60,17 +59,18 @@ import {
   useVariationStore,
   useShippingStore,
   useCategoryStore,
+  useProductCompletion,
 } from "@/stores";
 import { storeToRefs } from "pinia";
 import { Form } from "vee-validate";
-import { PRODUCTS_STATUS } from "@/constants";
-import { useProductCompletion } from "@/stores";
-import { onMounted, onBeforeUnmount, onUnmounted } from "vue";
-import { SelectType } from "@/types";
-import { ref } from "vue";
+import { PRODUCTS_STATUS, GAP_OUT_COMPONENT } from "@/constants";
+import { onMounted, onBeforeUnmount, onUnmounted, ref } from "vue";
+import { UploadImage, SelectType } from "@/types";
 import Swal from "sweetalert2";
-import { authApi } from "@/api";
-import { useEventBusValidate } from "@/hooks";
+import { authApi, nonAuthApi } from "@/api";
+import { ToastStatus } from "@/enums";
+
+import { useEventBusValidate, useNotification } from "@/hooks";
 const { updateShow } = useProductCompletion();
 const { name, description } = storeToRefs(useGeneralInformationStore());
 const { images } = storeToRefs(useMediaStore());
@@ -78,11 +78,11 @@ const { price, discountsType, taxType, currentDiscountId, currentTaxId } =
   storeToRefs(usePriceStore());
 const { SKU, quantity, barcode } = storeToRefs(useInventoryStore());
 const { variations } = storeToRefs(useVariationStore());
-const { shippingInfo } = storeToRefs(useShippingStore());
+const { shippingInfo, isPhysical } = storeToRefs(useShippingStore());
 const { selectedCategories, selectedTags } = storeToRefs(useCategoryStore());
 const { error, startEventBus, stopEventBus } = useEventBusValidate();
+const currentStatusId = ref(0);
 const saveProduct = () => {
-  console.log(setupData());
   Swal.fire({
     title: "Do you want to save?",
     showCancelButton: true,
@@ -96,44 +96,76 @@ const saveProduct = () => {
   });
 };
 
-const setupData = (): FormData => {
-  const formData = new FormData();
-  formData.append("name", name.value);
-  formData.append("description", description.value);
-  images.value.map((image: File, index) =>
-    formData.append(`file[${index}]`, image.name)
-  );
-  formData.append("price", `${price.value}`);
-  formData.append(
-    "discount",
-    `${discountsType.value[currentDiscountId.value].value}`
-  );
-  formData.append("tax", `${taxType.value[currentTaxId.value].value}`);
-  formData.append("sku", SKU.value);
-  formData.append("quantity", `${quantity.value}`);
-  formData.append("barcode", barcode.value);
-  variations.value.map((variation, index) =>
-    Object.keys(variation).map((variationKey) =>
-      formData.append(
-        `variation[${index}][${variationKey}]`,
-        variations.value[index][variationKey]
-      )
-    )
-  );
-  Object.keys(shippingInfo.value).map((ship, index) => {
-    formData.append(
-      `shipping[${index}][${ship}]`,
-      `${shippingInfo.value[ship]}`
+const setupData = (): FormData | boolean => {
+  const dataValidated = validateData();
+  if (dataValidated == -1) {
+    const formData = new FormData();
+    formData.append("name", name.value);
+    formData.append("description", description.value);
+    images.value.map((image: File, index) =>
+      formData.append(`file[${index}]`, image.name)
     );
-  });
-  selectedCategories.value.map((category, index) => {
-    formData.append(`category[${index}]`, `${category.id}`);
-  });
-  selectedTags.value.map((tag, index) =>
-    formData.append(`tag[${index}]`, `${tag.id}`)
-  );
-  formData.append("status", status.value[currentStatusId.value].name);
-  return formData;
+    formData.append("price", `${price.value}`);
+    formData.append(
+      "discount",
+      `${discountsType.value[currentDiscountId.value].value}`
+    );
+    formData.append("tax_fee", `${taxType.value[currentTaxId.value].value}`);
+    formData.append("sku", SKU.value);
+    formData.append("stock", `${quantity.value}`);
+    formData.append("barcode", barcode.value);
+    variations.value.map((variation, index) =>
+      Object.keys(variation).map((variationKey) =>
+        formData.append(
+          `variation[${index}][${variationKey}]`,
+          variations.value[index][variationKey]
+        )
+      )
+    );
+    if (isPhysical.value) {
+      Object.keys(shippingInfo.value).map((ship, index) => {
+        formData.append(
+          `shipping[${index}][${ship}]`,
+          `${shippingInfo.value[ship]}`
+        );
+      });
+    }
+    selectedCategories.value.map((category, index) => {
+      formData.append(`category[${index}]`, `${category.id}`);
+    });
+    selectedTags.value.map((tag, index) =>
+      formData.append(`tag[${index}]`, `${tag.id}`)
+    );
+    formData.append("status", status.value[currentStatusId.value].name);
+    return formData;
+  } else {
+    return false;
+  }
+};
+
+const validateData = (): number => {
+  let numOfError = -1;
+  if (name.value === "") {
+    useNotification().notify("name can not null", ToastStatus.ERROR);
+    numOfError++;
+  }
+  if (price.value === 0) {
+    useNotification().notify("price can not equal 0", ToastStatus.ERROR);
+    numOfError++;
+  }
+  if (SKU.value === "") {
+    useNotification().notify("SKU can not null", ToastStatus.ERROR);
+    numOfError++;
+  }
+  if (barcode.value === "") {
+    useNotification().notify("barcode can not null", ToastStatus.ERROR);
+    numOfError++;
+  }
+  if (quantity.value === 0) {
+    useNotification().notify("quantity can not equal 0", ToastStatus.ERROR);
+    numOfError++;
+  }
+  return numOfError;
 };
 
 const status = ref<SelectType[]>(
@@ -144,11 +176,28 @@ const status = ref<SelectType[]>(
     description: "",
   }))
 );
-const currentStatusId = ref(0);
 
 const postData = async () => {
-  const { data } = await authApi.post("products", setupData());
-  console.log(data);
+  const productData = setupData();
+  if (productData) {
+    const { data } = await authApi.post("products", productData);
+    const uploadImages: UploadImage[] = data.data;
+    await Promise.all(
+      uploadImages.map(
+        async (file, index) =>
+          await nonAuthApi.put("", images.value[index], { baseURL: file.url })
+      )
+    )
+      .then(() =>
+        useNotification().notify(
+          "create product successful",
+          ToastStatus.SUCCESS
+        )
+      )
+      .catch(() =>
+        useNotification().notify("oh can not upload image", ToastStatus.SUCCESS)
+      );
+  }
 };
 
 onMounted(() => {

@@ -8,6 +8,7 @@ export { UserInfo } from "./UserInfo";
 export { Link } from "./Link";
 export { SelectType } from "./SelectType";
 export { ShippingType } from "./ShippingType";
+export { UploadImage } from "./UploadImage";
 export * from "./table";
 export * from "./response";
 export * from "./BaseInterface";
