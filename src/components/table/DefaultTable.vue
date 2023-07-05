@@ -52,7 +52,7 @@
               </button>
             </div>
             <div v-if="item.slot === 'status'">
-              <SpanStatusComponent :bg="SpanStatus.SHIP">{{
+              <SpanStatusComponent :bg="SpanStatus.LOW_STOCK">{{
                 item.content
               }}</SpanStatusComponent>
             </div>
@@ -98,7 +98,10 @@ const createArrFromObj = (obj: any) => {
             slot: "product",
             span: 2,
           }
-        : { content: item }
+        : {
+            content: item,
+            slot: Object.values(SpanStatus).includes(item) ? "status" : "",
+          }
     );
   });
   arr.push({
