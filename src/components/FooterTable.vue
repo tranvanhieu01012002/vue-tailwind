@@ -10,10 +10,14 @@
       >
         <button v-if="link.url" @click="emits('click', link.url)">
           <font-awesome-icon
-            v-if="showIndex(link.label).includes('fa-solid')"
-            :icon="showIndex(link.label)"
+            v-if="link.label === 'LEFT'"
+            icon="fa-solid fa-angle-left"
           />
-          <span v-else>{{ showIndex(link.label) }}</span>
+          <font-awesome-icon
+            v-else-if="link.label === 'RIGHT'"
+            icon="fa-solid fa-angle-right"
+          />
+          <span v-else>{{ link.label }}</span>
         </button>
       </div>
     </div>
@@ -31,14 +35,6 @@ defineProps({
 });
 
 const emits = defineEmits(["click"]);
-
-const showIndex = (index: string) => {
-  if (index.includes("Previous")) {
-    return "fa-solid fa-angle-left";
-  } else if (index.includes("Next")) {
-    return "fa-solid fa-angle-right";
-  } else return index;
-};
 </script>
 <style scoped lang="scss">
 .active {

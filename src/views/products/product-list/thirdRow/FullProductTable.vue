@@ -30,7 +30,8 @@ onMounted(async () => {
 });
 const handleData = async (page = "") => {
   const { data } = await authApi.get(`products?${page}`);
-  products.value = data.data;
+  products.value = data.data.data;
+  console.log(data.data.links);
   links.value = data.data.links;
 };
 
