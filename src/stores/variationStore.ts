@@ -26,7 +26,6 @@ const useVariationStore = defineStore("variationStore", () => {
   };
 
   const removeVariation = (index: number) => {
-    console.log(index);
     variations.value.splice(index, 1);
   };
 

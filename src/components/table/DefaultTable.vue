@@ -52,9 +52,10 @@
               </button>
             </div>
             <div v-if="item.slot === 'status'">
-              <SpanStatusComponent :bg="SpanStatus.LOW_STOCK">{{
-                item.content
-              }}</SpanStatusComponent>
+              <SpanStatusComponent
+                :bg="SpanStatus[item.content as keyof typeof SpanStatus]"
+                >{{ item.content }}</SpanStatusComponent
+              >
             </div>
             <div :class="item.style" v-else>{{ item.content }}</div>
           </div>

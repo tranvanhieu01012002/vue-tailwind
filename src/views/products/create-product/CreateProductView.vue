@@ -131,7 +131,7 @@ const setupData = (): FormData | boolean => {
       });
     }
     selectedCategories.value.map((category, index) => {
-      formData.append(`category[${index}]`, `${category.id}`);
+      formData.append(`categories[${index}]`, `${category.id}`);
     });
     selectedTags.value.map((tag, index) =>
       formData.append(`tag[${index}]`, `${tag.id}`)

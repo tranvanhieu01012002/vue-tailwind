@@ -46,7 +46,7 @@
           :is="inputTag"
           :class="[showCss, errorMessage ? 'bg-red-200' : '']"
           :placeholder="InputType.PASSWORD == type ? '' : `${placeholder} ...`"
-          :value="inputValue"
+          :value="value"
           :type="type"
           :contentType="'html'"
           :toolbar="toolbarOptions"
@@ -129,12 +129,7 @@ const props = defineProps({
 });
 const show = ref(false);
 const name = toRef(props, "name");
-const {
-  value: inputValue,
-  errorMessage,
-  handleChange,
-  meta,
-} = useField(name, props.validate, {
+const { errorMessage, handleChange, meta } = useField(name, props.validate, {
   initialValue: props.value,
 });
 
@@ -156,7 +151,6 @@ watch(errorMessage, (newValue) => {
     EventBus.emit(EVENT_BUS_LIST.REMOVE_VALIDATE);
   }
 });
-
 const emits = defineEmits(["type", "iconClick", "selected"]);
 
 const typeAction = (event: Event) => {
