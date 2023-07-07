@@ -2,7 +2,7 @@ import { authApi } from "@/api";
 import { SelectType } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
+import { getUrlAllWithFields } from "@/helpers";
 const usePriceStore = defineStore("priceStore", () => {
   const price = ref(0);
   const discountsType = ref<SelectType[]>([]);
@@ -11,16 +11,18 @@ const usePriceStore = defineStore("priceStore", () => {
   const currentTaxId = ref(0);
 
   const getDiscountTypeApi = async () => {
-    discountsType.value = await callApi("discounts?fields=id,name,value");
+    discountsType.value = await callApi(
+      getUrlAllWithFields("discounts", "id,name,value")
+    );
   };
 
   const getTaxTypeApi = async () => {
-    taxType.value = await callApi("tax");
+    taxType.value = await callApi(getUrlAllWithFields("tax", "id,name,value"));
   };
 
   const callApi = async (resource: string) => {
     const { data } = await authApi.get(resource);
-    return data.data.data;
+    return data.data;
   };
 
   const getData = async () => {

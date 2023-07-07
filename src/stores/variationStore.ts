@@ -2,14 +2,16 @@ import { authApi } from "@/api";
 import { SelectType, Variation } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
+import { getUrlAllWithFields } from "@/helpers";
 const useVariationStore = defineStore("variationStore", () => {
   const variationsType = ref<SelectType[]>([]);
   const variations = ref<Variation[]>([]);
 
   const getVariationApi = async () => {
-    const { data } = await authApi.get(`variations?fields=id,name,value`);
-    variationsType.value = data.data.data;
+    const { data } = await authApi.get(
+      getUrlAllWithFields("variations", "id,name,value")
+    );
+    variationsType.value = data.data;
     setVariations();
   };
 

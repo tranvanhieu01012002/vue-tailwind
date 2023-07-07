@@ -2,7 +2,7 @@ import { authApi } from "@/api";
 import { SelectType } from "@/types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getUrlWithFieldsIdName } from "@/helpers";
+import { getUrlAllWithFields } from "@/helpers";
 const useCategoryStore = defineStore("categoryStore", () => {
   const categories = ref<SelectType[]>([]);
   const tags = ref<SelectType[]>([]);
@@ -12,16 +12,16 @@ const useCategoryStore = defineStore("categoryStore", () => {
   const currentTagId = ref(0);
 
   const getCategoriesApi = async () => {
-    categories.value = await callApi(getUrlWithFieldsIdName("categories"));
+    categories.value = await callApi(getUrlAllWithFields("categories"));
   };
 
   const getTagsApi = async () => {
-    tags.value = await callApi(getUrlWithFieldsIdName("tags"));
+    tags.value = await callApi(getUrlAllWithFields("tags"));
   };
 
   const callApi = async (resource: string) => {
     const { data } = await authApi.get(resource);
-    return data.data.data;
+    return data.data;
   };
 
   const addNewSelectedCategory = (index: number) => {

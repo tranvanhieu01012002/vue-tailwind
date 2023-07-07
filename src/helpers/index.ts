@@ -1,3 +1,4 @@
-const getUrlWithFieldsIdName = (url: string) => `${url}?fields=id,name`;
-export { getUrlWithFieldsIdName };
+const getUrlAllWithFields = (resource: string, fields = "id,name") =>
+  `${resource}?fields=${fields}&get-all=1`;
+export { getUrlAllWithFields };
 export * from "./constants";

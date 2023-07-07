@@ -10,11 +10,11 @@
       >
         <button v-if="link.url" @click="emits('click', link.url)">
           <font-awesome-icon
-            v-if="link.label === 'LEFT'"
+            v-if="link.label.includes('Previous')"
             icon="fa-solid fa-angle-left"
           />
           <font-awesome-icon
-            v-else-if="link.label === 'RIGHT'"
+            v-else-if="link.label.includes('Next')"
             icon="fa-solid fa-angle-right"
           />
           <span v-else>{{ link.label }}</span>
