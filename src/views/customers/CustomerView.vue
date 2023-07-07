@@ -31,10 +31,9 @@
       <template #title>customers</template>
       <template #content>
         <DefaultTable
-          v-if="customers.isLoaded"
           @click-icon="(icon, item) => clickBtn(icon, item)"
           :headers="header"
-          :data="customers.data"
+          :data="customers"
           :grid="8"
         />
       </template>
@@ -62,10 +61,7 @@ import { authApi } from "@/api";
 import { Link } from "@/types";
 
 const router = useRouter();
-const customers = ref({
-  isLoaded: false,
-  data: [],
-});
+const customers = ref([]);
 const links = ref<Link[]>([]);
 
 const clickBtn = (icon: number, item: string) => {
@@ -87,12 +83,8 @@ onMounted(async () => {
 
 const handleData = async (queryString = "") => {
   const { data } = await authApi.get(`users?${queryString}`);
-  customers.value.data = data.data.data.map((item: any) => {
-    delete item.rank;
-    return createArrFromObj(item);
-  });
-  links.value = data.data.links;
-  customers.value.isLoaded = true;
+  customers.value = data.data.data;
+  links.value = data.data.meta_data.links;
 };
 
 const openCustomerDetail = (indexItem: string) => {
@@ -101,35 +93,6 @@ const openCustomerDetail = (indexItem: string) => {
 
 const movePage = async (url: string) => {
   await handleData(url.split("?")[1]);
-};
-
-const createArrFromObj = (obj: any) => {
-  const arr = [];
-  Object.values(obj).map((item, index) => {
-    if (index > 1) {
-      arr.push(
-        index === 2
-          ? {
-              image:
-                "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/14%20prm.jpeg",
-              name: Object.values(obj)[index - 1],
-              info: item,
-              slot: "product",
-              span: 2,
-            }
-          : { content: item ?? "unknown" }
-      );
-    }
-  });
-  arr.push({
-    action: [
-      ["fas", "eye"],
-      ["fas", "pencil"],
-      ["fas", "trash"],
-    ],
-    span: 1,
-  });
-  return arr;
 };
 </script>
 <style scoped lang="scss"></style>
